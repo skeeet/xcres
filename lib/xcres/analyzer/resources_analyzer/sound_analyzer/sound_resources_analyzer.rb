@@ -29,7 +29,7 @@ module XCRes
       #
       # @return [Hash{String => Pathname}]
       #
-      def build_images_section_data sound_file_paths, options={}
+      def build_sound_section_data sound_file_paths, options={}
         sound_file_paths = filter_exclusions(sound_file_paths)
         build_section_data(sound_file_paths, options)
       end

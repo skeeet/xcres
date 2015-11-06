@@ -36,6 +36,21 @@ module XCRes
       end
 
 
+
+      # Build a section for image resources
+      #
+      # @param  [Array<String>] image_files
+      #
+      # @param  [Hash] options
+      #         see #build_section_data
+      #
+      # @return [Hash{String => Pathname}]
+      #
+      def build_images_section_data image_file_paths, options={}
+        image_file_paths = filter_exclusions(image_file_paths)
+        image_file_paths = filter_device_specific_image_paths(image_file_paths)
+        build_section_data(image_file_paths, options)
+      end
     end
   end
 end
