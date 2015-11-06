@@ -1,4 +1,4 @@
-require 'xcres/analyzer/resources_analyzer/base_resources_analyzer'
+require 'xcres/analyzer/resources_analyzer/images_analyzer/image_resources_analyzer'
 require 'xcres/model/xcassets/bundle'
 
 module XCRes
@@ -7,7 +7,7 @@ module XCRes
     # A +XCAssetsAnalyzer+ scans the project for asset catalogs,
     # which should be included in the output file.
     #
-    class XCAssetsAnalyzer < BaseResourcesAnalyzer
+    class XCAssetsAnalyzer < ImageResourcesAnalyzer
 
       def analyze
         @sections = build_sections_for_xcassets

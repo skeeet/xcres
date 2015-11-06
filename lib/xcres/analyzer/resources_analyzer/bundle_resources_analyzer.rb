@@ -47,17 +47,8 @@ module XCRes
       #         a section or nil
       #
       def build_section_for_bundle bundle_file_ref
-        bundle_files = find_files_in_dir(bundle_file_ref.real_path)
-        image_files = find_image_files(bundle_files)
-
-        log "Found bundle %s with #%s image files of #%s total files.", bundle_file_ref.path, image_files.count, bundle_files.count
-
-        section_name = basename_without_ext(bundle_file_ref.path)
-        section_data = build_images_section_data(image_files)
-        new_section(section_name, section_data)
+        # Should be overriden
       end
-
     end
-
   end
 end

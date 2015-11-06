@@ -56,6 +56,11 @@ const struct R {
         /// Please enter the correct password.
         __unsafe_unretained NSString *errorMessageWrongPassword;
     } Strings;
+    struct Sounds {
+        /// bell.caf
+        __unsafe_unretained NSString *bell;
+    } Sounds;
+  }
 } R;
 ```
 

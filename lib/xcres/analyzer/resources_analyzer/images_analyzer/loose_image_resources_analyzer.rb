@@ -1,4 +1,4 @@
-require 'xcres/analyzer/resources_analyzer/base_resources_analyzer'
+require 'xcres/analyzer/resources_analyzer/images_analyzer/image_resources_analyzer'
 
 module XCRes
   module ResourcesAnalyzer
@@ -7,7 +7,7 @@ module XCRes
     # loosely placed in the project or in a group and should be included in the
     # output file.
     #
-    class LooseResourcesAnalyzer < BaseResourcesAnalyzer
+    class LooseImageResourcesAnalyzer < ImageResourcesAnalyzer
 
       def analyze
         @sections = [build_section_for_loose_images]
