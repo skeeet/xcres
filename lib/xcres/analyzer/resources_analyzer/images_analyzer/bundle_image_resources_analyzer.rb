@@ -1,4 +1,5 @@
 require 'xcres/analyzer/resources_analyzer/bundle_resources_analyzer'
+require_relative 'image_helper'
 
 module XCRes
   module ResourcesAnalyzer
@@ -18,7 +19,7 @@ module XCRes
       #
       def build_section_for_bundle bundle_file_ref
         bundle_files = find_files_in_dir(bundle_file_ref.real_path)
-        image_files = find_image_files(bundle_files)
+        image_files = ImageHelper.find_image_files(bundle_files)
 
         log "Found bundle %s with #%s image files of #%s total files.", bundle_file_ref.path, image_files.count, bundle_files.count
 
