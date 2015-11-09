@@ -7,8 +7,9 @@
 Ⓥ Add section for Icons with 2 elements
 Ⓥ Found #1 image files in project.
 Ⓥ Found #1 asset catalogs in project.
-Ⓥ Found asset catalog Images.xcassets with #4 image files.
-Ⓥ Add section for ImagesAssets with 4 elements
+Ⓥ Found asset catalog Media.xcassets with #6 image files.
+Ⓥ Add section for MediaAssets with 6 elements
+Ⓥ Found #1 sound files in project.
 Ⓥ Strings files in project: ["en.lproj/InfoPlist.strings", "en.lproj/Localizable.strings", "de.lproj/Localizable.strings"]
 Ⓥ Native development languages: ["en"]
 Ⓥ Used languages for .strings files: ["en", "de"]

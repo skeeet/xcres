@@ -3,11 +3,13 @@ File References:
 - Example:
   - AppDelegate.h
   - AppDelegate.m
-  - Images.xcassets
+  - Media.xcassets
   - Icons.bundle
   - Images:
     - nyanCat.png
     - doge.jpeg
+  - Sounds:
+    - aif.aiff
   - Supporting Files:
     - Example-Info.plist
     - InfoPlist.strings:
@@ -41,8 +43,9 @@ Targets:
     - ResourcesBuildPhase:
       - Icons.bundle
       - doge.jpeg
+      - aif.aiff
       - InfoPlist.strings
-      - Images.xcassets
+      - Media.xcassets
       - Localizable.strings
     Build Configurations:
     - Debug:

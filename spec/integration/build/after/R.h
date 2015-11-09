@@ -18,7 +18,7 @@ extern const struct R {
         /// doge.jpeg
         __unsafe_unretained NSString *doge;
     } Images;
-    struct ImagesAssets {
+    struct MediaAssets {
         /// AppIcon
         __unsafe_unretained NSString *app;
         /// GrumpyCat
@@ -27,7 +27,15 @@ extern const struct R {
         __unsafe_unretained NSString *doge;
         /// LaunchImage
         __unsafe_unretained NSString *launch;
-    } ImagesAssets;
+        /// MP3
+        __unsafe_unretained NSString *mp3;
+        /// Aif
+        __unsafe_unretained NSString *soundsAif;
+    } MediaAssets;
+    struct Sounds {
+        /// mp3.mp3
+        __unsafe_unretained NSString *mp3;
+    } Sounds;
     struct Strings {
         /// Bar String
         __unsafe_unretained NSString *bar;

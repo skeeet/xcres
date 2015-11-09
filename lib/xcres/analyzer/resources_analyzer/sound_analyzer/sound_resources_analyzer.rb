@@ -16,7 +16,7 @@ module XCRes
       #         the filtered list
       #
       def find_sound_files file_paths
-        file_paths.select { |path| path.to_s.match /\.(caf|raw|wav)$/ }
+        file_paths.select { |path| path.to_s.match /\.(caf|raw|wav|aiff?|mp3)$/ }
       end
 
 

@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06B697431BF0D28800DC9F6F /* aif.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 06B697421BF0D28800DC9F6F /* aif.aiff */; };
 		71239DA81912BFF70058657F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA71912BFF70058657F /* Foundation.framework */; };
 		71239DAA1912BFF70058657F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA91912BFF70058657F /* CoreGraphics.framework */; };
 		71239DAC1912BFF70058657F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DAB1912BFF70058657F /* UIKit.framework */; };
 		71239DB21912BFF80058657F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 71239DB01912BFF70058657F /* InfoPlist.strings */; };
 		71239DB41912BFF80058657F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71239DB31912BFF80058657F /* main.m */; };
 		71239DB81912BFF80058657F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71239DB71912BFF80058657F /* AppDelegate.m */; };
-		71239DBA1912BFF80058657F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71239DB91912BFF80058657F /* Images.xcassets */; };
+		71239DBA1912BFF80058657F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71239DB91912BFF80058657F /* Media.xcassets */; };
 		71239DC11912BFF80058657F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DC01912BFF80058657F /* XCTest.framework */; };
 		71239DC21912BFF80058657F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA71912BFF70058657F /* Foundation.framework */; };
 		71239DC31912BFF80058657F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DAB1912BFF70058657F /* UIKit.framework */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06B697421BF0D28800DC9F6F /* aif.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = aif.aiff; sourceTree = "<group>"; };
 		711976AD19A392DE005748B4 /* nyanCat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nyanCat.png; sourceTree = "<group>"; };
 		71239DA41912BFF70058657F /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71239DA71912BFF70058657F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -44,7 +46,7 @@
 		71239DB51912BFF80058657F /* Example-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Prefix.pch"; sourceTree = "<group>"; };
 		71239DB61912BFF80058657F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		71239DB71912BFF80058657F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		71239DB91912BFF80058657F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		71239DB91912BFF80058657F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		71239DBF1912BFF80058657F /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		71239DC01912BFF80058657F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		71239DDD1912C07E0058657F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -77,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06B697411BF0D27A00DC9F6F /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				06B697421BF0D28800DC9F6F /* aif.aiff */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		71239D9B1912BFF70058657F = {
 			isa = PBXGroup;
 			children = (
@@ -111,9 +121,10 @@
 			children = (
 				71239DB61912BFF80058657F /* AppDelegate.h */,
 				71239DB71912BFF80058657F /* AppDelegate.m */,
-				71239DB91912BFF80058657F /* Images.xcassets */,
+				71239DB91912BFF80058657F /* Media.xcassets */,
 				715C078C198D029800316E8C /* Icons.bundle */,
 				715C078D198D029800316E8C /* Images */,
+				06B697411BF0D27A00DC9F6F /* Sounds */,
 				71239DAE1912BFF70058657F /* Supporting Files */,
 			);
 			path = Example;
@@ -218,8 +229,9 @@
 			files = (
 				715C078F198D029800316E8C /* Icons.bundle in Resources */,
 				715C0790198D029800316E8C /* doge.jpeg in Resources */,
+				06B697431BF0D28800DC9F6F /* aif.aiff in Resources */,
 				71239DB21912BFF80058657F /* InfoPlist.strings in Resources */,
-				71239DBA1912BFF80058657F /* Images.xcassets in Resources */,
+				71239DBA1912BFF80058657F /* Media.xcassets in Resources */,
 				71239DDC1912C07E0058657F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

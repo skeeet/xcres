@@ -17,27 +17,32 @@ describe 'XCRes::ResourcesAggregateAnalyzer' do
       bundle_section_b = stub('Bundle Section B')
       loose_image_section = stub('Loose Images Section')
       xcassets_section = stub('XCAssets Section')
+      loose_sound_section = stub('Loose Sounds Section')
 
-      XCRes::ResourcesAnalyzer::BundleResourcesAnalyzer.any_instance
+      XCRes::ResourcesAnalyzer::BundleImageResourcesAnalyzer.any_instance
         .expects(:analyze).returns([bundle_section_a, bundle_section_b])
-      XCRes::ResourcesAnalyzer::LooseResourcesAnalyzer.any_instance
+      XCRes::ResourcesAnalyzer::LooseImageResourcesAnalyzer.any_instance
         .expects(:analyze).returns(loose_image_section)
       XCRes::ResourcesAnalyzer::XCAssetsAnalyzer.any_instance
         .expects(:analyze).returns(xcassets_section)
+      XCRes::ResourcesAnalyzer::LooseSoundResourcesAnalyzer.any_instance
+        .expects(:analyze).returns(loose_sound_section)
 
-      @analyzer.analyze.should.eql?([bundle_section_a, bundle_section_b, loose_image_section, xcassets_section])
+      @analyzer.analyze.should.eql?([bundle_section_a, bundle_section_b, loose_image_section, xcassets_section, loose_sound_section])
     end
 
     it 'should return only bundle sections if there are no loose images' do
       bundle_section = stub('Bundle Section')
       xcassets_section = stub('XCAssets Section')
 
-      XCRes::ResourcesAnalyzer::BundleResourcesAnalyzer.any_instance
+      XCRes::ResourcesAnalyzer::BundleImageResourcesAnalyzer.any_instance
         .expects(:analyze).returns(bundle_section)
-      XCRes::ResourcesAnalyzer::LooseResourcesAnalyzer.any_instance
+      XCRes::ResourcesAnalyzer::LooseImageResourcesAnalyzer.any_instance
         .expects(:analyze).returns([])
       XCRes::ResourcesAnalyzer::XCAssetsAnalyzer.any_instance
         .expects(:analyze).returns(xcassets_section)
+      XCRes::ResourcesAnalyzer::LooseSoundResourcesAnalyzer.any_instance
+        .expects(:analyze).returns([])
 
       @analyzer.analyze.should.eql?([bundle_section, xcassets_section])
     end

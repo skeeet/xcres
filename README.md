@@ -10,7 +10,7 @@
 as struct constants. So you will never have to reference a resource, without
 knowing already at compile time if it exists or not.
 
-It includes **loose images**, **.bundles**, **asset catalogs** (.xcasset)
+It includes **loose images**, **loose sounds**, **.bundles**, **asset catalogs** (.xcasset)
 and even **.strings** in the index.
 
 It gives you **code autocompletion** for resources and localized string keys,

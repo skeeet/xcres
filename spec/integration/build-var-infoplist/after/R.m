@@ -15,10 +15,14 @@ const struct R R = {
     .Images = {
         .doge = @"doge.jpeg",
     },
-    .ImagesAssets = {
+    .MediaAssets = {
+        .aif = @"aif",
         .app = @"AppIcon",
         .doge = @"Doge",
         .launch = @"LaunchImage",
+    },
+    .Sounds = {
+        .aif = @"aif.aiff",
     },
     .Strings = {
         .bar = @"bar",

@@ -18,14 +18,20 @@ extern const struct R {
         /// doge.jpeg
         __unsafe_unretained NSString *doge;
     } Images;
-    struct ImagesAssets {
+    struct MediaAssets {
+        /// aif
+        __unsafe_unretained NSString *aif;
         /// AppIcon
         __unsafe_unretained NSString *app;
         /// Doge
         __unsafe_unretained NSString *doge;
         /// LaunchImage
         __unsafe_unretained NSString *launch;
-    } ImagesAssets;
+    } MediaAssets;
+    struct Sounds {
+        /// aif.aiff
+        __unsafe_unretained NSString *aif;
+    } Sounds;
     struct Strings {
         /// Bar String
         __unsafe_unretained NSString *bar;

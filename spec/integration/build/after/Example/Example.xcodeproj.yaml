@@ -3,11 +3,14 @@ File References:
 - Example:
   - AppDelegate.h
   - AppDelegate.m
-  - Images.xcassets
+  - Media.xcassets
   - Icons.bundle
   - Images:
     - nyanCat.png
     - doge.jpeg
+  - Sounds:
+    - mp3.mp3
+    - aif.aiff
   - Supporting Files:
     - Example-Info.plist
     - InfoPlist.strings:
@@ -24,7 +27,6 @@ File References:
   - XCTest.framework
 - Products:
   - Example.app
-  - ExampleTests.xctest
 
 
 
@@ -42,7 +44,8 @@ Targets:
       - Icons.bundle
       - doge.jpeg
       - InfoPlist.strings
-      - Images.xcassets
+      - mp3.mp3
+      - Media.xcassets
       - Localizable.strings
     Build Configurations:
     - Debug:
@@ -63,44 +66,6 @@ Targets:
           INFOPLIST_FILE: Example/Example-Info.plist
           PRODUCT_NAME: "$(TARGET_NAME)"
           WRAPPER_EXTENSION: app
-- ExampleTests:
-    Build Phases:
-    - SourcesBuildPhase: []
-    - FrameworksBuildPhase:
-      - XCTest.framework
-      - UIKit.framework
-      - Foundation.framework
-    - ResourcesBuildPhase: []
-    Build Configurations:
-    - Debug:
-        Build Settings:
-          BUNDLE_LOADER: "$(BUILT_PRODUCTS_DIR)/Example.app/Example"
-          FRAMEWORK_SEARCH_PATHS:
-          - "$(SDKROOT)/Developer/Library/Frameworks"
-          - "$(inherited)"
-          - "$(DEVELOPER_FRAMEWORKS_DIR)"
-          GCC_PRECOMPILE_PREFIX_HEADER: 'YES'
-          GCC_PREFIX_HEADER: Example/Example-Prefix.pch
-          GCC_PREPROCESSOR_DEFINITIONS:
-          - DEBUG=1
-          - "$(inherited)"
-          INFOPLIST_FILE: ExampleTests/ExampleTests-Info.plist
-          PRODUCT_NAME: "$(TARGET_NAME)"
-          TEST_HOST: "$(BUNDLE_LOADER)"
-          WRAPPER_EXTENSION: xctest
-    - Release:
-        Build Settings:
-          BUNDLE_LOADER: "$(BUILT_PRODUCTS_DIR)/Example.app/Example"
-          FRAMEWORK_SEARCH_PATHS:
-          - "$(SDKROOT)/Developer/Library/Frameworks"
-          - "$(inherited)"
-          - "$(DEVELOPER_FRAMEWORKS_DIR)"
-          GCC_PRECOMPILE_PREFIX_HEADER: 'YES'
-          GCC_PREFIX_HEADER: Example/Example-Prefix.pch
-          INFOPLIST_FILE: ExampleTests/ExampleTests-Info.plist
-          PRODUCT_NAME: "$(TARGET_NAME)"
-          TEST_HOST: "$(BUNDLE_LOADER)"
-          WRAPPER_EXTENSION: xctest
 
 
 
