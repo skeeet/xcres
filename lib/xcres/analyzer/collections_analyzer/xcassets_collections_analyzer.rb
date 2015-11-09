@@ -1,4 +1,5 @@
-require_relative 'base_collections_analyzer'
+require 'xcres/analyzer/collections_analyzer/base_collections_analyzer'
+require 'xcres/model/xcassets/bundle'
 require 'set'
 
 module XCRes
@@ -40,11 +41,11 @@ module XCRes
       #         a section or nil
       #
       def build_section_for_xcassets bundle
-        relevant_files = @linked_resource.filter_files(bundle.resources.map(&:path))
+        relevant_files = linked_resource.filter_files(bundle.resources.map(&:path))
 
         log "Found asset catalog %s with #%s relevant resources of #%s total resources.", bundle.path.basename, relevant_files.count, bundle.resources.count
 
-        section_name = "#{basename_without_ext(bundle.path)}#{@linked_resource.resource_type}Assets"
+        section_name = "#{basename_without_ext(bundle.path)}#{linked_resource.resource_type}Assets"
         section_data = build_section_data(relevant_files, {
           use_basename:     [:path],
           path_without_ext: true

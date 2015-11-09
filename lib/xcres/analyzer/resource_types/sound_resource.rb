@@ -1,4 +1,4 @@
-require 'xcres/analyzer/resources_analyzer/base_resources_analyzer'
+require 'xcres/analyzer/resource_types/base_resource'
 
 module XCRes
   module ResourceTypes
@@ -6,18 +6,18 @@ module XCRes
     #
     class SoundResource < BaseResource
 
-      def filter_words
+      def self.filter_words
         return ['sound', 'melody', 'music']
       end
 
-      def filter_files file_paths
-        filtered_files = super.filter_files file_paths
+      def self.filter_files file_paths
+        filtered_files = super(file_paths)
         filtered_files.select { |path| path.to_s.match /\.(caf|raw|wav|aiff?|mp3)$/ }
         return filtered_files
       end
 
-      def resource_type
-        return "Sound"
+      def self.resource_type
+        return 'Sounds'
       end
     end
   end

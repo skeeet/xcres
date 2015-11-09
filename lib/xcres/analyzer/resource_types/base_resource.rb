@@ -1,5 +1,3 @@
-require 'xcres/analyzer/analyzer'
-
 module XCRes
   module ResourceTypes
 
@@ -7,16 +5,16 @@ module XCRes
     #
     class BaseResource
 
-      def filter_words
+      def self.filter_words
         return []
       end
 
-      def filter_files file_paths
+      def self.filter_files file_paths
         return file_paths
       end
 
-      def resource_type
-        return "Undefined"
+      def self.resource_type
+        return 'Undefined'
       end
     end
   end

@@ -1,8 +1,9 @@
 require 'xcres/analyzer/aggregate_analyzer'
-require 'xcres/analyzer/resources_analyzer/images_analyzer/bundle_image_resources_analyzer'
-require 'xcres/analyzer/resources_analyzer/images_analyzer/loose_image_resources_analyzer'
-require 'xcres/analyzer/resources_analyzer/images_analyzer/xcassets_analyzer'
-require 'xcres/analyzer/resources_analyzer/sound_analyzer/loose_sound_resources_analyzer'
+require 'xcres/analyzer/collections_analyzer/bundle_collections_analyzer'
+require 'xcres/analyzer/collections_analyzer/loose_files_collections_analyzer'
+require 'xcres/analyzer/collections_analyzer/xcassets_collections_analyzer'
+require 'xcres/analyzer/resource_types/image_resource'
+require 'xcres/analyzer/resource_types/sound_resource'
 
 module XCRes
 
@@ -19,15 +20,14 @@ module XCRes
 
     def analyze
       self.analyzers = []
-      add_with_class CollectionsAnalyzer::BundleCollectionsAnalyzer, ResourceTypes::ImageResource
-      add_with_class CollectionsAnalyzer::BundleCollectionsAnalyzer, ResourceTypes::SoundResource
-      add_with_class CollectionsAnalyzer::XCAssetsCollectionsAnalyzer, ResourceTypes::ImageResource
-      add_with_class CollectionsAnalyzer::XCAssetsCollectionsAnalyzer, ResourceTypes::SoundResource
-      add_with_class CollectionsAnalyzer::LooseFilesCollectionsAnalyzer, ResourceTypes::ImageResource
-      add_with_class CollectionsAnalyzer::LooseFilesCollectionsAnalyzer, ResourceTypes::SoundResource
+      add_with_class CollectionsAnalyzer::BundleCollectionsAnalyzer, { linked_resource: ResourceTypes::ImageResource}
+      add_with_class CollectionsAnalyzer::BundleCollectionsAnalyzer, { linked_resource: ResourceTypes::SoundResource}
+      add_with_class CollectionsAnalyzer::XCAssetsCollectionsAnalyzer, { linked_resource: ResourceTypes::ImageResource}
+      add_with_class CollectionsAnalyzer::XCAssetsCollectionsAnalyzer, { linked_resource: ResourceTypes::SoundResource}
+      add_with_class CollectionsAnalyzer::LooseFilesCollectionsAnalyzer, { linked_resource: ResourceTypes::ImageResource}
+      add_with_class CollectionsAnalyzer::LooseFilesCollectionsAnalyzer, { linked_resource: ResourceTypes::SoundResource}
       super
     end
-
   end
 
 end

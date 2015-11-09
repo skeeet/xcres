@@ -1,5 +1,4 @@
-require_relative 'base_collections_analyzer'
-require 'set'
+require 'xcres/analyzer/collections_analyzer/base_collections_analyzer'
 
 module XCRes
   module CollectionsAnalyzer
@@ -40,7 +39,7 @@ module XCRes
       #
       def build_section_for_bundle bundle_file_ref
         bundle_files = find_files_in_dir(bundle_file_ref.real_path)
-        relevant_files = @linked_resource.filter_files(bundle_files)
+        relevant_files = self.linked_resource.filter_files(bundle_files)
 
         log "Found bundle %s with #%s relevant files of #%s total files.", bundle_file_ref.path, relevant_files.count, bundle_files.count
 

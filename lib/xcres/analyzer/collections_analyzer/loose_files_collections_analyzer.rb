@@ -1,5 +1,4 @@
-require_relative 'base_collections_analyzer'
-require 'set'
+require 'xcres/analyzer/collections_analyzer/base_collections_analyzer'
 
 module XCRes
   module CollectionsAnalyzer
@@ -9,7 +8,7 @@ module XCRes
     #
     class LooseFilesCollectionsAnalyzer < BaseCollectionsAnalyzer
       def analyze
-        @sections = build_section_for_loose_files
+        @sections = [build_section_for_loose_files]
         super
       end
 
@@ -22,13 +21,14 @@ module XCRes
       # @return [Section]
       #
       def build_section_for_loose_files
-        relevant_files = @linked_resource.filter_files(resources_files.map(&:path))
+        relevant_files = linked_resource.filter_files(resources_files.map(&:path))
         filter_exclusions(relevant_files)
 
-        log "Found #%s %s files in project.", relevant_files.count, @linked_resource.resource_type.downcase
+        log "Found #%s %s files in project.", relevant_files.count, linked_resource.resource_type.downcase
 
-        data = build_section_data(relevant_files, use_basename: [:key, :path])
-        new_section(@linked_resource.resource_type, data)
+        section_name = linked_resource.resource_type
+        section_data = build_section_data(relevant_files, use_basename: [:key, :path])
+        new_section(section_name, section_data)
       end
     end
   end

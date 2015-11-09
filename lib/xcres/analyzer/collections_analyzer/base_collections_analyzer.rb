@@ -1,6 +1,5 @@
 require 'xcres/analyzer/analyzer'
 require 'xcres/analyzer/resource_types/base_resource'
-require 'set'
 
 module XCRes
   module CollectionsAnalyzer
@@ -10,11 +9,11 @@ module XCRes
     #
     class BaseCollectionsAnalyzer < Analyzer
 
-      @linked_resource = nil
+      attr_accessor :linked_resource
 
-      def initialize linked_resource=nil, target=nil, options={}
-        @linked_resource = linked_resource
-        super.initialize(target, options)
+      def initialize(target=nil, options={})
+        @linked_resource = options[:linked_resource]
+        super(target, options)
       end
 
       # Get a list of all files in a directory
