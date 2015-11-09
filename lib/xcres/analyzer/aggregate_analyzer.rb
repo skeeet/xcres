@@ -35,8 +35,8 @@ module XCRes
     #
     # @return [Analyzer]
     #
-    def add_with_class(analyzer_class, options={})
-      analyzer = analyzer_class.new(target, self.options.merge(options))
+    def add_with_class(collection_class, resource_class, options={})
+      analyzer = collection_class.new(resource_class, target, self.options.merge(options))
       analyzer.exclude_file_patterns = exclude_file_patterns
       analyzer.logger = logger
       self.analyzers << analyzer

@@ -1,14 +1,13 @@
-require 'xcres/analyzer/resources_analyzer/images_analyzer/image_resources_analyzer'
-require 'xcres/model/xcassets/bundle'
+require_relative 'base_collections_analyzer'
+require 'set'
 
 module XCRes
-  module ResourcesAnalyzer
+  module CollectionsAnalyzer
 
-    # A +XCAssetsAnalyzer+ scans the project for asset catalogs,
-    # which should be included in the output file.
+    # A +XCAssetsCollectionsAnalyzer+ scans the project for asset bundles,
+    # that should be included in the project
     #
-    class XCAssetsAnalyzer < ImageResourcesAnalyzer
-
+    class XCAssetsCollectionsAnalyzer < BaseCollectionsAnalyzer
       def analyze
         @sections = build_sections_for_xcassets
         super
@@ -41,18 +40,17 @@ module XCRes
       #         a section or nil
       #
       def build_section_for_xcassets bundle
-        log "Found asset catalog %s with #%s image files.",
-          bundle.path.basename, bundle.resources.count
+        relevant_files = @linked_resource.filter_files(bundle.resources.map(&:path))
 
-        section_name = "#{basename_without_ext(bundle.path)}Assets"
-        section_data = build_images_section_data(bundle.resources.map(&:path), {
+        log "Found asset catalog %s with #%s relevant resources of #%s total resources.", bundle.path.basename, relevant_files.count, bundle.resources.count
+
+        section_name = "#{basename_without_ext(bundle.path)}#{@linked_resource.resource_type}Assets"
+        section_data = build_section_data(relevant_files, {
           use_basename:     [:path],
           path_without_ext: true
         })
         new_section(section_name, section_data)
       end
-
     end
-
   end
 end

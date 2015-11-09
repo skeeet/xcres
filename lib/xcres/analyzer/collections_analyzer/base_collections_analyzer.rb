@@ -1,15 +1,21 @@
 require 'xcres/analyzer/analyzer'
+require 'xcres/analyzer/resource_types/base_resource'
 require 'set'
 
 module XCRes
-  module ResourcesAnalyzer
+  module CollectionsAnalyzer
 
-    # A +BaseResourcesAnalyzer+ scans the project for resources,
-    # which should be included in the output file.
+    # A +BaseCollectionsAnalyzer+ scans the project for collections of resources,
+    # such as bundles, asset bundles or loose files.
     #
-    class BaseResourcesAnalyzer < Analyzer
+    class BaseCollectionsAnalyzer < Analyzer
 
-      FILTER_WORDS = ['icon', 'image']
+      @linked_resource = nil
+
+      def initialize linked_resource=nil, target=nil, options={}
+        @linked_resource = linked_resource
+        super.initialize(target, options)
+      end
 
       # Get a list of all files in a directory
       #
@@ -28,36 +34,6 @@ module XCRes
         Dir.chdir dir do
           Dir['**/*'].map { |path| Pathname(path) }
         end
-      end
-
-      # Build a section for image resources
-      #
-      # @param  [Array<String>] image_files
-      #
-      # @param  [Hash] options
-      #         see #build_section_data
-      #
-      # @return [Hash{String => Pathname}]
-      #
-      def build_images_section_data image_file_paths, options={}
-        image_file_paths = filter_exclusions(image_file_paths)
-        image_file_paths = filter_device_specific_image_paths(image_file_paths)
-        build_section_data(image_file_paths, options)
-      end
-
-      # Filter out device scale and idiom specific images (retina, ipad),
-      # but ensure the base exist once
-      #
-      # @param  [Array<Pathname>] file_paths
-      #         the file paths to filter
-      #
-      # @return [Array<String>]
-      #         the filtered file paths
-      #
-      def filter_device_specific_image_paths file_paths
-        file_paths.map do |path|
-          path.to_s.gsub /(@2x)?(~(iphone|ipad))?(?=\.\w+$)/, ''
-        end.to_set.to_a
       end
 
       # Build a keys to paths mapping
@@ -112,7 +88,7 @@ module XCRes
         # loosing word separation if camel case was used.
         key = key.underscore.downcase
 
-        for filter_word in FILTER_WORDS do
+        for filter_word in @linked_resource.filter_words do
           key.gsub! filter_word, ''
         end
 

@@ -19,10 +19,12 @@ module XCRes
 
     def analyze
       self.analyzers = []
-      add_with_class ResourcesAnalyzer::BundleImageResourcesAnalyzer
-      add_with_class ResourcesAnalyzer::LooseImageResourcesAnalyzer
-      add_with_class ResourcesAnalyzer::XCAssetsAnalyzer
-      add_with_class ResourcesAnalyzer::LooseSoundResourcesAnalyzer
+      add_with_class CollectionsAnalyzer::BundleCollectionsAnalyzer, ResourceTypes::ImageResource
+      add_with_class CollectionsAnalyzer::BundleCollectionsAnalyzer, ResourceTypes::SoundResource
+      add_with_class CollectionsAnalyzer::XCAssetsCollectionsAnalyzer, ResourceTypes::ImageResource
+      add_with_class CollectionsAnalyzer::XCAssetsCollectionsAnalyzer, ResourceTypes::SoundResource
+      add_with_class CollectionsAnalyzer::LooseFilesCollectionsAnalyzer, ResourceTypes::ImageResource
+      add_with_class CollectionsAnalyzer::LooseFilesCollectionsAnalyzer, ResourceTypes::SoundResource
       super
     end
 

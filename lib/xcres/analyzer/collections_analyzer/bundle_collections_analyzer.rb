@@ -1,13 +1,13 @@
-require 'xcres/analyzer/resources_analyzer/base_resources_analyzer'
+require_relative 'base_collections_analyzer'
+require 'set'
 
 module XCRes
-  module ResourcesAnalyzer
+  module CollectionsAnalyzer
 
-    # A +BundleResourcesAnalyzer+ scans the project for bundles, whose resources
-    # should be included in the output file.
+    # A +BundleCollectionsAnalyzer+ scans the project for bundles of resources,
+    # that should be included in the project
     #
-    class BundleResourcesAnalyzer < BaseResourcesAnalyzer
-
+    class BundleCollectionsAnalyzer < BaseCollectionsAnalyzer
       def analyze
         @sections = build_sections_for_bundles
         super
@@ -19,7 +19,7 @@ module XCRes
       #         the built sections
       #
       def build_sections_for_bundles
-        bundle_file_refs = find_bundle_file_refs
+        bundle_file_refs = find_file_refs_by_extname '.bundle'
 
         log "Found #%s resource bundles in project.", bundle_file_refs.count
 
@@ -28,14 +28,6 @@ module XCRes
           log 'Add section for %s with %s elements', section.name, section.items.count unless section.nil?
           section
         end.compact
-      end
-
-      # Discover all references to resources bundles in project
-      #
-      # @return [Array<PBXFileReference>]
-      #
-      def find_bundle_file_refs
-        find_file_refs_by_extname '.bundle'
       end
 
       # Build a section for a resources bundle
@@ -47,7 +39,14 @@ module XCRes
       #         a section or nil
       #
       def build_section_for_bundle bundle_file_ref
-        # Should be overriden
+        bundle_files = find_files_in_dir(bundle_file_ref.real_path)
+        relevant_files = @linked_resource.filter_files(bundle_files)
+
+        log "Found bundle %s with #%s relevant files of #%s total files.", bundle_file_ref.path, relevant_files.count, bundle_files.count
+
+        section_name = basename_without_ext(bundle_file_ref.path)
+        section_data = build_section_data(relevant_files)
+        new_section(section_name, section_data)
       end
     end
   end
