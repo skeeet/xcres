@@ -53,14 +53,9 @@ EOS
 
     transformed_items = {}
 
-    puts "Section #{section.name} has ##{section.items.length} items"
-
     for key, value in section.items
 
-      puts "Checking key #{key}"
-
       if value.is_a? XCRes::Section then
-        puts "Adding subsection #{key}"
         transformed_items[key] = transform_section_contents(value)
       else
         transformed_key = transform_key(key)
@@ -77,8 +72,6 @@ EOS
           next
         end
 
-        puts "Adding key #{transformed_key} => #{value}"
-
         transformed_items[transformed_key] = value
       end
     end
@@ -88,8 +81,6 @@ EOS
 
   def add_section section
     @sections[section.name] = transform_section_contents(section)
-    deb = JSON.pretty_generate(@sections[section.name])
-    puts "Added section #{section.name}: #{deb}"
   end
 
   def build
@@ -139,29 +130,58 @@ EOS
       result
     end
 
+    def fill_header_section struct, parent_key, section_key, section_content, comment = nil
+      struct.writeln 'struct %s%s {' % [parent_key, section_key]
+      for key, value in section_content.sort
+        if value.is_a? Hash then
+          struct.section do |substruct|
+            fill_header_section(substruct, section_key, key, value)
+          end
+        else
+          struct.section do |substruct|
+            if documented?
+              substruct.writeln '/// %s' % (comment || value) #unless comment.nil?
+            end
+            substruct.writeln '__unsafe_unretained NSString *%s;' % key
+          end
+        end
+      end
+      struct.writeln '} %s;' % section_key
+    end
+
     def build_header_contents h_file
+
+
+    deb = JSON.pretty_generate(@sections)
+    puts "Processing: #{deb}"
+
       h_file.writeln BANNER
       h_file.writeln
       h_file.writeln '#import <Foundation/Foundation.h>'
       h_file.writeln
       h_file.writeln 'extern const struct %s {' % resources_constant_name
       h_file.section do |struct|
-        for key, section_content in @sections.sort
-          enumerate_section(key, section_content) do |section_key, enumerate_keys|
-            struct.writeln 'struct %s {' % section_key
-            struct.section do |section_struct|
-              enumerate_keys.call do |key, value, comment|
-                if documented?
-                  section_struct.writeln '/// %s' % (comment || value) #unless comment.nil?
-                end
-                section_struct.writeln '__unsafe_unretained NSString *%s;' % key
-              end
-            end
-            struct.writeln '} %s;' % section_key
-          end
+        for section_key, section_content in @sections.sort
+          fill_header_section(struct, '', section_key, section_content)
         end
       end
       h_file.writeln '} %s;' % resources_constant_name
+    end
+
+    def fill_impl_section struct, section_key, section_content
+      struct.writeln '.%s = {' % section_key
+      for key, value in section_content.sort
+        if value.is_a? Hash then
+          struct.section do |substruct|
+            fill_impl_section(substruct, key, value)
+          end
+        else
+          struct.section do |substruct|
+            substruct.writeln '.%s = @"%s",' % [key, value]
+          end
+        end
+      end
+      struct.writeln '},'
     end
 
     def build_impl_contents m_file
@@ -171,37 +191,25 @@ EOS
       m_file.writeln
       m_file.writeln 'const struct %s %s = {' % [resources_constant_name, resources_constant_name]
       m_file.section do |struct|
-        for key, section_content in @sections.sort
-          enumerate_section(key, section_content) do |section_key, enumerate_keys|
-            struct.writeln '.%s = {' % section_key
-            struct.section do |section_struct|
-              enumerate_keys.call do |key, value|
-                section_struct.writeln '.%s = @"%s",' % [key, value]
-              end
-            end
-            struct.writeln '},'
-          end
+        for section_key, section_content in @sections.sort
+          fill_impl_section(struct, section_key, section_content)
         end
       end
       m_file.writeln '};'
     end
 
-    def enumerate_section section_key, section_content, &block
-      for key, value in section_content.sort
-        if value.is_a? Hash
-          underlying_value = value[:value]
-          if underlying_value.is_a? Hash
-            puts "Found section #{key}. Will add its contents"
-            enumerate_section(key, underlying_value, block)
+    def enumerate_section section_key, section_content
+      # Pass section key and block to yield the keys ordered
+      proc = Proc.new do |&block|
+        for key, value in section_content.sort
+          if value.is_a? Hash
+            block.call key, value[:value], value[:comment]
           else
-            puts "Found entry #{key}, calling a block with #{key} => #{underlying_value}"
-            block.call key, underlying_value, value[:comment]
+            block.call key, value, nil
           end
-        else
-          puts "Found no entry, calling a block with empty stuff"
-          block.call key, value, nil
         end
       end
+      yield section_key, proc
     end
 
 end
