@@ -52,7 +52,7 @@ module XCRes
 
 	        subsection_name = resource_type.resource_type
 	        subsection_data = build_section_data(relevant_files)
-          section_hash[subsection_name] = subsection_data
+          section_hash[subsection_name] = new_section(subsection_name, subsection_data)
 	      end
 
 	    new_section(section_name, section_hash)

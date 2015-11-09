@@ -29,7 +29,7 @@ EOS
   attr_accessor :documented
   alias :documented? :documented
 
-  # @return [Hash{String => {String => String}}]
+  # @return [Hash{String => {String => String}|{String => {String => String}}}]
   #         the sections, which will been written to the built files
   attr_reader :sections
 
@@ -48,30 +48,48 @@ EOS
     @resources_constant_name ||= basename_without_ext output_path
   end
 
-  def add_section name, items, options = {}
-    raise ArgumentError.new 'No items given!' if items.nil?
+  def transform_section_contents section
+    raise ArgumentError.new 'No items given!' if section.items.nil?
 
     transformed_items = {}
 
-    for key, value in items
-      transformed_key = transform_key key, options
+    puts "Section #{section.name} has ##{section.items.length} items"
 
-      # Skip invalid key names
-      if transformed_key.length == 0
-        logger.warn "Skip invalid key: '%s'. (Was transformed to empty text)", key
-        next
+    for key, value in section.items
+
+      puts "Checking key #{key}"
+
+      if value.is_a? XCRes::Section then
+        puts "Adding subsection #{key}"
+        transformed_items[key] = transform_section_contents(value)
+      else
+        transformed_key = transform_key(key)
+
+        # Skip invalid key names
+        if transformed_key.length == 0
+          logger.warn "Skip invalid key: '%s'. (Was transformed to empty text)", key
+          next
+        end
+
+        # Skip compiler keywords
+        if COMPILER_KEYWORDS.include? transformed_key
+          logger.warn "Skip invalid key: '%s'. (Was transformed to keyword '%s')", key, transformed_key
+          next
+        end
+
+        puts "Adding key #{transformed_key} => #{value}"
+
+        transformed_items[transformed_key] = value
       end
-
-      # Skip compiler keywords
-      if COMPILER_KEYWORDS.include? transformed_key
-        logger.warn "Skip invalid key: '%s'. (Was transformed to keyword '%s')", key, transformed_key
-        next
-      end
-
-      transformed_items[transformed_key] = value
     end
 
-    @sections[name] = transformed_items
+    return transformed_items
+  end
+
+  def add_section section
+    @sections[section.name] = transform_section_contents(section)
+    deb = JSON.pretty_generate(@sections[section.name])
+    puts "Added section #{section.name}: #{deb}"
   end
 
   def build
@@ -89,7 +107,7 @@ EOS
 
   protected
 
-    def transform_key key, options
+    def transform_key key, options = {}
       # Split the key into components
       components = key.underscore.split /[_\/ ]/
 
@@ -128,17 +146,19 @@ EOS
       h_file.writeln
       h_file.writeln 'extern const struct %s {' % resources_constant_name
       h_file.section do |struct|
-        enumerate_sections do |section_key, enumerate_keys|
-          struct.writeln 'struct %s {' % section_key
-          struct.section do |section_struct|
-            enumerate_keys.call do |key, value, comment|
-              if documented?
-                section_struct.writeln '/// %s' % (comment || value) #unless comment.nil?
+        for key, section_content in @sections.sort
+          enumerate_section(key, section_content) do |section_key, enumerate_keys|
+            struct.writeln 'struct %s {' % section_key
+            struct.section do |section_struct|
+              enumerate_keys.call do |key, value, comment|
+                if documented?
+                  section_struct.writeln '/// %s' % (comment || value) #unless comment.nil?
+                end
+                section_struct.writeln '__unsafe_unretained NSString *%s;' % key
               end
-              section_struct.writeln '__unsafe_unretained NSString *%s;' % key
             end
+            struct.writeln '} %s;' % section_key
           end
-          struct.writeln '} %s;' % section_key
         end
       end
       h_file.writeln '} %s;' % resources_constant_name
@@ -151,33 +171,36 @@ EOS
       m_file.writeln
       m_file.writeln 'const struct %s %s = {' % [resources_constant_name, resources_constant_name]
       m_file.section do |struct|
-        enumerate_sections do |section_key, enumerate_keys|
-          struct.writeln '.%s = {' % section_key
-          struct.section do |section_struct|
-            enumerate_keys.call do |key, value|
-              section_struct.writeln '.%s = @"%s",' % [key, value]
+        for key, section_content in @sections.sort
+          enumerate_section(key, section_content) do |section_key, enumerate_keys|
+            struct.writeln '.%s = {' % section_key
+            struct.section do |section_struct|
+              enumerate_keys.call do |key, value|
+                section_struct.writeln '.%s = @"%s",' % [key, value]
+              end
             end
+            struct.writeln '},'
           end
-          struct.writeln '},'
         end
       end
       m_file.writeln '};'
     end
 
-    def enumerate_sections
-      # Iterate sections ordered by key
-      for section_key, section_content in @sections.sort
-        # Pass section key and block to yield the keys ordered
-        proc = Proc.new do |&block|
-          for key, value in section_content.sort
-            if value.is_a? Hash
-              block.call key, value[:value], value[:comment]
-            else
-              block.call key, value, nil
-            end
+    def enumerate_section section_key, section_content, &block
+      for key, value in section_content.sort
+        if value.is_a? Hash
+          underlying_value = value[:value]
+          if underlying_value.is_a? Hash
+            puts "Found section #{key}. Will add its contents"
+            enumerate_section(key, underlying_value, block)
+          else
+            puts "Found entry #{key}, calling a block with #{key} => #{underlying_value}"
+            block.call key, underlying_value, value[:comment]
           end
+        else
+          puts "Found no entry, calling a block with empty stuff"
+          block.call key, value, nil
         end
-        yield section_key, proc
       end
     end
 

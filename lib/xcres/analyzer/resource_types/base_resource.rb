@@ -5,15 +5,15 @@ module XCRes
     #
     class BaseResource
 
-      def self.filter_words
+      def filter_words
         return []
       end
 
-      def self.filter_files file_paths
+      def filter_files file_paths, options = {}
         return file_paths
       end
 
-      def self.resource_type
+      def resource_type
         return 'Undefined'
       end
     end

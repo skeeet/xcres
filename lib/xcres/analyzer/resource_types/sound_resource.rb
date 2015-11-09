@@ -6,17 +6,19 @@ module XCRes
     #
     class SoundResource < BaseResource
 
-      def self.filter_words
+      def filter_words
         return ['sound', 'melody', 'music']
       end
 
-      def self.filter_files file_paths
-        filtered_files = super(file_paths)
-        filtered_files.select { |path| path.to_s.match /\.(caf|raw|wav|aiff?|mp3)$/ }
+      def filter_files file_paths, options = {}
+        filtered_files = super(file_paths, options)
+        unless options[:ignore_extensions] then
+          filtered_files.select! { |path| path.to_s.match /\.(caf|raw|wav|aiff?|mp3)$/ }
+        end
         return filtered_files
       end
 
-      def self.resource_type
+      def resource_type
         return 'Sounds'
       end
     end

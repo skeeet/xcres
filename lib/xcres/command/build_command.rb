@@ -32,7 +32,7 @@ class XCRes::BuildCommand < XCRes::ProjectCommand
       sections = analyzer.analyze
 
       sections.each do |section|
-        builder.add_section section.name, section.items, section.options
+        builder.add_section section
       end
     end
 

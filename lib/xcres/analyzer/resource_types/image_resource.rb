@@ -6,17 +6,19 @@ module XCRes
     #
     class ImageResource < BaseResource
 
-      def self.filter_words
+      def filter_words
         return ['icon', 'image']
       end
 
-      def self.filter_files file_paths
-        filtered_files = super(file_paths)
-        filtered_files.select { |path| path.to_s.match /\.(png|jpe?g|gif)$/ }
+      def filter_files file_paths, options = {}
+        filtered_files = super(file_paths, options)
+        unless options[:ignore_extensions] then
+          filtered_files.select! { |path| path.to_s.match /\.(png|jpe?g|gif)$/ }
+        end
         return filter_device_specific_image_paths(filtered_files)
       end
 
-      def self.resource_type
+      def resource_type
         return 'Images'
       end
 
@@ -29,7 +31,7 @@ module XCRes
       # @return [Array<String>]
       #         the filtered file paths
       #
-      def self.filter_device_specific_image_paths file_paths
+      def filter_device_specific_image_paths file_paths
         file_paths.map do |path|
           path.to_s.gsub /(@2x)?(~(iphone|ipad))?(?=\.\w+$)/, ''
         end.to_set.to_a

@@ -53,7 +53,7 @@ module XCRes
 
         linked_resources.each do |resource_type|
 
-	        relevant_files = resource_type.filter_files(bundle.resources.map(&:path))
+	        relevant_files = resource_type.filter_files(bundle.resources.map(&:path), { ignore_extensions: true })
 
 	        log "Found #%s %s in the asset catalog.", relevant_files.count, resource_type.resource_type.downcase
 
@@ -62,7 +62,7 @@ module XCRes
 	          use_basename:     [:path],
 	          path_without_ext: true
 	        })
-          section_hash[subsection_name] = subsection_data
+          section_hash[subsection_name] = new_section(subsection_name, subsection_data)
 	    end
 
 	    new_section(section_name, section_hash)
