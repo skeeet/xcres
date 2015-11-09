@@ -7,6 +7,7 @@ module XCRes
     # that should be included in the project
     #
     class BundleCollectionsAnalyzer < BaseCollectionsAnalyzer
+
       def analyze
         @sections = build_sections_for_bundles
         super
@@ -39,13 +40,22 @@ module XCRes
       #
       def build_section_for_bundle bundle_file_ref
         bundle_files = find_files_in_dir(bundle_file_ref.real_path)
-        relevant_files = self.linked_resource.filter_files(bundle_files)
 
-        log "Found bundle %s with #%s relevant files of #%s total files.", bundle_file_ref.path, relevant_files.count, bundle_files.count
-
+        log "Found bundle %s with #%s files.", bundle_file_ref.path, bundle_files.count
         section_name = basename_without_ext(bundle_file_ref.path)
-        section_data = build_section_data(relevant_files)
-        new_section(section_name, section_data)
+        section_hash = Hash.new
+
+        linked_resources.each do |resource_type|
+	        relevant_files = resource_type.filter_files(bundle_files)
+
+	        log "Found #%s %s in the bundle.", relevant_files.count, resource_type.resource_type.downcase
+
+	        subsection_name = resource_type.resource_type
+	        subsection_data = build_section_data(relevant_files)
+          section_hash[subsection_name] = subsection_data
+	      end
+
+	    new_section(section_name, section_hash)
       end
     end
   end

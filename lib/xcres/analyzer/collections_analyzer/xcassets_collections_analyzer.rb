@@ -9,9 +9,14 @@ module XCRes
     # that should be included in the project
     #
     class XCAssetsCollectionsAnalyzer < BaseCollectionsAnalyzer
+
       def analyze
         @sections = build_sections_for_xcassets
         super
+      end
+
+      def exclude_file_patterns
+        super + ['Contents.json']
       end
 
       # Build a section for each asset catalog if it contains any resources
@@ -41,16 +46,26 @@ module XCRes
       #         a section or nil
       #
       def build_section_for_xcassets bundle
-        relevant_files = linked_resource.filter_files(bundle.resources.map(&:path))
 
-        log "Found asset catalog %s with #%s relevant resources of #%s total resources.", bundle.path.basename, relevant_files.count, bundle.resources.count
+        log "Found asset catalog %s with #%s resources.", bundle.path.basename, bundle.resources.count
+        section_name = "#{basename_without_ext(bundle.path)}Assets"
+        section_hash = Hash.new
 
-        section_name = "#{basename_without_ext(bundle.path)}#{linked_resource.resource_type}Assets"
-        section_data = build_section_data(relevant_files, {
-          use_basename:     [:path],
-          path_without_ext: true
-        })
-        new_section(section_name, section_data)
+        linked_resources.each do |resource_type|
+
+	        relevant_files = resource_type.filter_files(bundle.resources.map(&:path))
+
+	        log "Found #%s %s in the asset catalog.", relevant_files.count, resource_type.resource_type.downcase
+
+	        subsection_name = resource_type.resource_type
+	        subsection_data = build_section_data(relevant_files, {
+	          use_basename:     [:path],
+	          path_without_ext: true
+	        })
+          section_hash[subsection_name] = subsection_data
+	    end
+
+	    new_section(section_name, section_hash)
       end
     end
   end

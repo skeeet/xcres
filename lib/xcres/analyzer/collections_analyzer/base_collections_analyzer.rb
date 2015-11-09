@@ -9,10 +9,10 @@ module XCRes
     #
     class BaseCollectionsAnalyzer < Analyzer
 
-      attr_accessor :linked_resource
+      attr_accessor :linked_resources
 
       def initialize(target=nil, options={})
-        @linked_resource = options[:linked_resource]
+        @linked_resources = options[:linked_resources]
         super(target, options)
       end
 
@@ -87,9 +87,10 @@ module XCRes
         # loosing word separation if camel case was used.
         key = key.underscore.downcase
 
-        for filter_word in @linked_resource.filter_words do
-          key.gsub! filter_word, ''
-        end
+        # TODO: Make this smarter to filter out words for relevant types only
+        # for filter_word in @linked_resource.filter_words do
+        #   key.gsub! filter_word, ''
+        # end
 
         # Remove unnecessary underscores
         key = key.gsub(/^_*|_*$|(_)_+/, '\1')
