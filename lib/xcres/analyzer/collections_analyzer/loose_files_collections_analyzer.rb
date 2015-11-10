@@ -14,7 +14,7 @@ module XCRes
       end
 
       def exclude_file_patterns
-        super + ['Default.*', 'Default@2x.*', 'Default-568h@2x.*']
+        super + ['Default.*', 'Default@2x.*', 'Default-568h.*', 'Default-568h@2x.*']
       end
 
       # Build a section for loose resource files in the project
@@ -25,7 +25,7 @@ module XCRes
 
         linked_resources.map do |resource_type|
           relevant_files = resource_type.filter_files(resources_files.map(&:path))
-          filter_exclusions(relevant_files)
+          relevant_files = filter_exclusions(relevant_files)
 
           log "Found #%s %s in the project.", relevant_files.count, resource_type.resource_type.downcase
 

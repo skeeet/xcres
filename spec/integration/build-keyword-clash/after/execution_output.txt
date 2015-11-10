@@ -3,9 +3,9 @@
 ⚠ Argument XCODEPROJ is a directory. Try to locate the Xcode project in this directory.
 ✓ Use Example/Example.xcodeproj as XCODEPROJ.
 Ⓥ Found #0 resource bundles in project.
-Ⓥ Found #3 image files in project.
 Ⓥ Found #0 asset catalogs in project.
-Ⓥ Found #0 sound files in project.
+Ⓥ Found #0 images in the project.
+Ⓥ Found #0 sounds in the project.
 Ⓥ Strings files in project: ["en.lproj/InfoPlist.strings"]
 Ⓥ Native development languages: ["en"]
 Ⓥ Used languages for .strings files: ["en"]

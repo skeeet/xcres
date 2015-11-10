@@ -15,10 +15,6 @@ module XCRes
         super
       end
 
-      def exclude_file_patterns
-        super + ['Contents.json', '.DS_Store']
-      end
-
       # Build a section for each asset catalog if it contains any resources
       #
       # @return [Array<Section>]
@@ -54,6 +50,7 @@ module XCRes
         linked_resources.each do |resource_type|
 
 	        relevant_files = resource_type.filter_files(bundle.resources.map(&:path))
+          relevant_files = filter_exclusions(relevant_files)
 
 	        log "Found #%s %s in the asset catalog.", relevant_files.count, resource_type.resource_type.downcase
 

@@ -47,6 +47,7 @@ module XCRes
 
         linked_resources.each do |resource_type|
 	        relevant_files = resource_type.filter_files(bundle_files)
+          relevant_files = filter_exclusions(relevant_files)
 
 	        log "Found #%s %s in the bundle.", relevant_files.count, resource_type.resource_type.downcase
 
