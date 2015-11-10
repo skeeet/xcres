@@ -9,28 +9,36 @@
 
 extern const struct R {
     struct Icons {
-        /// tab_bar/tabbar_list.png
-        __unsafe_unretained NSString *tabBarList;
-        /// tab_bar/tabbar_map.png
-        __unsafe_unretained NSString *tabBarMap;
+        struct IconsImages {
+            /// tab_bar/tabbar_list.png
+            __unsafe_unretained NSString *tabBarList;
+            /// tab_bar/tabbar_map.png
+            __unsafe_unretained NSString *tabBarMap;
+        } Images;
+        struct IconsSounds {
+        } Sounds;
     } Icons;
     struct Images {
         /// doge.jpeg
         __unsafe_unretained NSString *doge;
     } Images;
     struct MediaAssets {
-        /// AppIcon
-        __unsafe_unretained NSString *app;
-        /// GrumpyCat
-        __unsafe_unretained NSString *catsGrumpy;
-        /// Doge
-        __unsafe_unretained NSString *doge;
-        /// LaunchImage
-        __unsafe_unretained NSString *launch;
-        /// MP3
-        __unsafe_unretained NSString *mp3;
-        /// Aif
-        __unsafe_unretained NSString *soundsAif;
+        struct MediaAssetsImages {
+            /// AppIcon
+            __unsafe_unretained NSString *app;
+            /// GrumpyCat
+            __unsafe_unretained NSString *catsGrumpy;
+            /// Doge
+            __unsafe_unretained NSString *doge;
+            /// LaunchImage
+            __unsafe_unretained NSString *launch;
+        } Images;
+        struct MediaAssetsSounds {
+            /// MP3
+            __unsafe_unretained NSString *mp3;
+            /// Aif
+            __unsafe_unretained NSString *soundsAif;
+        } Sounds;
     } MediaAssets;
     struct Sounds {
         /// mp3.mp3

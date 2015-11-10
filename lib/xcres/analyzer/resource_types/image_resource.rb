@@ -12,10 +12,11 @@ module XCRes
 
       def filter_files file_paths, options = {}
         filtered_files = super(file_paths, options)
-        unless options[:ignore_extensions] then
-          filtered_files.select! { |path| path.to_s.match /\.(png|jpe?g|gif)$/ }
-        end
         return filter_device_specific_image_paths(filtered_files)
+      end
+
+      def metch_file path
+        return path.to_s.match /\.(png|jpe?g|gif)$/
       end
 
       def resource_type

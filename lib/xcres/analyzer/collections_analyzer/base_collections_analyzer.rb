@@ -87,10 +87,14 @@ module XCRes
         # loosing word separation if camel case was used.
         key = key.underscore.downcase
 
-        # TODO: Make this smarter to filter out words for relevant types only
-        # for filter_word in @linked_resource.filter_words do
-        #   key.gsub! filter_word, ''
-        # end
+        for resource_type in @linked_resources do
+          if resource_type.match_file(path) then
+            for filter_word in resource_type.filter_words do
+              key.gsub!(filter_word, '')
+            end
+            break
+          end
+        end
 
         # Remove unnecessary underscores
         key = key.gsub(/^_*|_*$|(_)_+/, '\1')

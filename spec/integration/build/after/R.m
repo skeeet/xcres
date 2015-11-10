@@ -16,12 +16,16 @@ const struct R R = {
         .doge = @"doge.jpeg",
     },
     .MediaAssets = {
-        .app = @"AppIcon",
-        .catsGrumpy = @"GrumpyCat",
-        .doge = @"Doge",
-        .launch = @"LaunchImage",
-        .mp3 = @"MP3",
-        .soundsAif = @"Aif",
+        .Images = {
+            .app = @"AppIcon",
+            .catsGrumpy = @"GrumpyCat",
+            .doge = @"Doge",
+            .launch = @"LaunchImage",
+        },
+        .Sounds = {
+            .mp3 = @"MP3",
+            .soundsAif = @"Aif",
+        },
     },
     .Sounds = {
         .mp3 = @"mp3.mp3",
