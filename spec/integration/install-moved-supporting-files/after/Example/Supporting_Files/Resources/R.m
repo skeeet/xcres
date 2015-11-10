@@ -9,8 +9,12 @@
 
 const struct R R = {
     .ImagesAssets = {
-        .app = @"AppIcon",
-        .launch = @"LaunchImage",
+        .Data = {
+        },
+        .Images = {
+            .app = @"AppIcon",
+            .launch = @"LaunchImage",
+        },
     },
     .Strings = {
     },
