@@ -11,9 +11,7 @@ module XCRes
 
       def filter_files file_paths, options = {}
         filtered_files = file_paths
-        unless options[:ignore_extensions] then
-          filtered_files.select! { |path| match_file(path) }
-        end
+        filtered_files.select! { |path| match_file(path) }
         return filtered_files
       end
 

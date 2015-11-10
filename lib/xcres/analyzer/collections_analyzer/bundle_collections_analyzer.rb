@@ -25,7 +25,7 @@ module XCRes
 
         bundle_file_refs.map do |file_ref|
           section = build_section_for_bundle(file_ref)
-          log 'Add section for %s with %s elements', section.name, section.items.count unless section.nil?
+          log 'Add section for %s with %s elements.', section.name, section.items.count unless section.nil?
           section
         end.compact
       end

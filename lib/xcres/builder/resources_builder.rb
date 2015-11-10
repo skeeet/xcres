@@ -130,7 +130,7 @@ EOS
       result
     end
 
-    def fill_header_section struct, parent_key, section_key, section_content, comment = nil
+    def fill_header_section struct, parent_key, section_key, section_content
       struct.writeln 'struct %s%s {' % [parent_key, section_key]
       for key, value in section_content.sort
         if value.is_a? Hash then
@@ -139,6 +139,11 @@ EOS
           end
         else
           struct.section do |substruct|
+            comment = nil
+            if value.is_a? XCRes::String then
+              comment = value.comment
+              value = value.value
+            end
             if documented?
               substruct.writeln '/// %s' % (comment || value) #unless comment.nil?
             end
@@ -150,11 +155,6 @@ EOS
     end
 
     def build_header_contents h_file
-
-
-    deb = JSON.pretty_generate(@sections)
-    puts "Processing: #{deb}"
-
       h_file.writeln BANNER
       h_file.writeln
       h_file.writeln '#import <Foundation/Foundation.h>'
@@ -177,6 +177,9 @@ EOS
           end
         else
           struct.section do |substruct|
+            if value.is_a? XCRes::String then
+              value = value.value
+            end
             substruct.writeln '.%s = @"%s",' % [key, value]
           end
         end
@@ -197,19 +200,4 @@ EOS
       end
       m_file.writeln '};'
     end
-
-    def enumerate_section section_key, section_content
-      # Pass section key and block to yield the keys ordered
-      proc = Proc.new do |&block|
-        for key, value in section_content.sort
-          if value.is_a? Hash
-            block.call key, value[:value], value[:comment]
-          else
-            block.call key, value, nil
-          end
-        end
-      end
-      yield section_key, proc
-    end
-
 end

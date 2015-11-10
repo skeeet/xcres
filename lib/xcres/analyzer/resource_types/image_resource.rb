@@ -15,7 +15,7 @@ module XCRes
         return filter_device_specific_image_paths(filtered_files)
       end
 
-      def metch_file path
+      def match_file path
         return path.to_s.match /\.(png|jpe?g|gif)$/
       end
 

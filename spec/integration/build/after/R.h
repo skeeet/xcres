@@ -11,9 +11,9 @@ extern const struct R {
     struct Icons {
         struct IconsImages {
             /// tab_bar/tabbar_list.png
-            __unsafe_unretained NSString *tabBarList;
+            __unsafe_unretained NSString *tabBarTabbarList;
             /// tab_bar/tabbar_map.png
-            __unsafe_unretained NSString *tabBarMap;
+            __unsafe_unretained NSString *tabBarTabbarMap;
         } Images;
         struct IconsSounds {
         } Sounds;
@@ -23,22 +23,22 @@ extern const struct R {
         __unsafe_unretained NSString *doge;
     } Images;
     struct MediaAssets {
+        struct MediaAssetsData {
+            /// MP3
+            __unsafe_unretained NSString *mp3;
+            /// Aif
+            __unsafe_unretained NSString *soundsAif;
+        } Data;
         struct MediaAssetsImages {
             /// AppIcon
             __unsafe_unretained NSString *app;
             /// GrumpyCat
-            __unsafe_unretained NSString *catsGrumpy;
+            __unsafe_unretained NSString *catsGrumpyCat;
             /// Doge
             __unsafe_unretained NSString *doge;
             /// LaunchImage
             __unsafe_unretained NSString *launch;
         } Images;
-        struct MediaAssetsSounds {
-            /// MP3
-            __unsafe_unretained NSString *mp3;
-            /// Aif
-            __unsafe_unretained NSString *soundsAif;
-        } Sounds;
     } MediaAssets;
     struct Sounds {
         /// mp3.mp3

@@ -9,22 +9,26 @@
 
 const struct R R = {
     .Icons = {
-        .tabBarList = @"tab_bar/tabbar_list.png",
-        .tabBarMap = @"tab_bar/tabbar_map.png",
+        .Images = {
+            .tabBarTabbarList = @"tab_bar/tabbar_list.png",
+            .tabBarTabbarMap = @"tab_bar/tabbar_map.png",
+        },
+        .Sounds = {
+        },
     },
     .Images = {
         .doge = @"doge.jpeg",
     },
     .MediaAssets = {
-        .Images = {
-            .app = @"AppIcon",
-            .catsGrumpy = @"GrumpyCat",
-            .doge = @"Doge",
-            .launch = @"LaunchImage",
-        },
-        .Sounds = {
+        .Data = {
             .mp3 = @"MP3",
             .soundsAif = @"Aif",
+        },
+        .Images = {
+            .app = @"AppIcon",
+            .catsGrumpyCat = @"GrumpyCat",
+            .doge = @"Doge",
+            .launch = @"LaunchImage",
         },
     },
     .Sounds = {
