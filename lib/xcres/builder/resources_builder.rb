@@ -131,6 +131,9 @@ EOS
     end
 
     def fill_header_section struct, parent_key, section_key, section_content
+
+      return unless section_content.length > 0
+      
       struct.writeln 'struct %s%s {' % [parent_key, section_key]
       for key, value in section_content.sort
         if value.is_a? Hash then
@@ -169,6 +172,9 @@ EOS
     end
 
     def fill_impl_section struct, section_key, section_content
+
+      return unless section_content.length > 0
+
       struct.writeln '.%s = {' % section_key
       for key, value in section_content.sort
         if value.is_a? Hash then

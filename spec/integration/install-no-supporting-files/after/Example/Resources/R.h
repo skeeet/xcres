@@ -9,8 +9,6 @@
 
 extern const struct R {
     struct ImagesAssets {
-        struct ImagesAssetsData {
-        } Data;
         struct ImagesAssetsImages {
             /// AppIcon
             __unsafe_unretained NSString *app;
@@ -18,6 +16,4 @@ extern const struct R {
             __unsafe_unretained NSString *launch;
         } Images;
     } ImagesAssets;
-    struct Strings {
-    } Strings;
 } R;

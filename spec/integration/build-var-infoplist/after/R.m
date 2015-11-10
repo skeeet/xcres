@@ -13,8 +13,6 @@ const struct R R = {
             .tabBarTabbarList = @"tab_bar/tabbar_list.png",
             .tabBarTabbarMap = @"tab_bar/tabbar_map.png",
         },
-        .Sounds = {
-        },
     },
     .Images = {
         .doge = @"doge.jpeg",

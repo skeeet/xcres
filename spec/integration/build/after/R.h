@@ -15,8 +15,6 @@ extern const struct R {
             /// tab_bar/tabbar_map.png
             __unsafe_unretained NSString *tabBarTabbarMap;
         } Images;
-        struct IconsSounds {
-        } Sounds;
     } Icons;
     struct Images {
         /// doge.jpeg
