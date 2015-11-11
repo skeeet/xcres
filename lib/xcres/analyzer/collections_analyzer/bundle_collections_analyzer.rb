@@ -52,7 +52,7 @@ module XCRes
 	        log "Found #%s %s in the bundle.", relevant_files.count, resource_type.resource_type.downcase
 
 	        subsection_name = resource_type.resource_type
-	        subsection_data = build_section_data(relevant_files)
+	        subsection_data = build_section_data(relevant_files, resource_type)
           section_hash[subsection_name] = new_section(subsection_name, subsection_data)
 	      end
 

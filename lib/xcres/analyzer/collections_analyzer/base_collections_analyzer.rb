@@ -47,7 +47,7 @@ module XCRes
       #
       # @return [Hash{String => Pathname}]
       #
-      def build_section_data file_paths, options={}
+      def build_section_data file_paths, resource_type, options={}
         options = {
           use_basename: [],
           path_without_ext: false,
@@ -57,7 +57,7 @@ module XCRes
         keys_to_paths = {}
         for path in file_paths
           basename = File.basename(path)
-          key = key_from_path(options[:use_basename].include?(:key) ? basename : path.to_s)
+          key = key_from_path(options[:use_basename].include?(:key) ? basename : path.to_s, resource_type)
           transformed_path = options[:use_basename].include?(:path) ? basename : path
           if options[:path_without_ext]
             transformed_path = transformed_path.to_s.sub /#{File.extname(path)}$/, ''
@@ -75,11 +75,11 @@ module XCRes
       #
       # @return [String]
       #
-      def key_from_path path
+      def key_from_path path, resource_type
         key = path.to_s
 
         # Get rid of the file extension
-        key = key.sub /#{File.extname(path)}$/, ''
+        key.sub! /#{File.extname(path)}$/, ''
 
         # Graphical assets tend to contain words, which you want to strip.
         # Because we want to list the words to ignore only in one variant,
@@ -87,17 +87,12 @@ module XCRes
         # loosing word separation if camel case was used.
         key = key.underscore.downcase
 
-        for resource_type in @linked_resources do
-          if resource_type.match_file(path) then
-            for filter_word in resource_type.filter_words do
-              key.gsub!(filter_word, '')
-            end
-            break
-          end
+        for filter_word in resource_type.filter_words do
+          key.gsub! filter_word, ''
         end
 
         # Remove unnecessary underscores
-        key = key.gsub(/^_*|_*$|(_)_+/, '\1')
+        key.gsub! /^_*|_*$|(_)_+/, '\1'
 
         return key
       end

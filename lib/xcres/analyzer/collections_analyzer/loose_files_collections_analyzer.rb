@@ -30,7 +30,7 @@ module XCRes
           log "Found #%s %s in the project.", relevant_files.count, resource_type.resource_type.downcase
 
           section_name = resource_type.resource_type
-          section_data = build_section_data(relevant_files, use_basename: [:key, :path])
+          section_data = build_section_data(relevant_files, resource_type, use_basename: [:key, :path])
           new_section(section_name, section_data)
         end.compact
       end

@@ -82,4 +82,27 @@ describe 'XCRes::ResourceTypes::ImageResource' do
       @type.resource_type.should.be.eql?('Images')
     end
   end
+  
+  describe '#filter_device_specific_image_paths' do
+    it 'returns an empty list if no files were given' do
+      @type.filter_device_specific_image_paths([]).should.eql?([])
+    end
+
+    it 'filters device scale specific images without doublets' do
+      @type.filter_device_specific_image_paths(['a.png', 'a@2x.png']).should.eql?(['a.png'])
+    end
+
+    it 'filters device scale specifiers from image paths' do
+      @type.filter_device_specific_image_paths(['a@2x.png']).should.eql?(['a.png'])
+    end
+
+    it 'filters idiom specific images without doublets' do
+      @type.filter_device_specific_image_paths(['a.png', 'a~iphone.png', 'a~ipad.png']).should.eql?(['a.png'])
+    end
+
+    it 'filters idiom specifiers from image paths' do
+      @type.filter_device_specific_image_paths(['a~iphone.png']).should.eql?(['a.png'])
+      @type.filter_device_specific_image_paths(['a~ipad.png']).should.eql?(['a.png'])
+    end
+  end
 end

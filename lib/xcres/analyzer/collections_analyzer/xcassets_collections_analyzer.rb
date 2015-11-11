@@ -55,7 +55,7 @@ module XCRes
 	        log "Found #%s %s in the asset catalog.", relevant_files.count, resource_type.resource_type.downcase
 
 	        subsection_name = resource_type.resource_type
-	        subsection_data = build_section_data(relevant_files, {
+	        subsection_data = build_section_data(relevant_files, resource_type, {
 	          use_basename:     [:path],
 	          path_without_ext: true
 	        })
