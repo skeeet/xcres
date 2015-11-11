@@ -21,13 +21,20 @@ module XCRes
 	    # @param  [String] comment
 	    #         see #comment
 	    #
-	    #
 		def initialize key, value, comment
 			@key = key
 			@value = value
 			@comment = comment
 		end
 
+	    # Compare two strings
+	    #
+	    # @param  [XCRes::String] other
+	    #         another string to compare to this one
+	    #
+	    # @return [Bool]
+	    #         whether contents are equal
+	    #
 	    def ==(other)
 	      self.key == other.key \
 	        && self.value == other.value \

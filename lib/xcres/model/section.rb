@@ -31,6 +31,14 @@ module XCRes
       @options = options
     end
 
+    # Compare two sections
+    #
+    # @param  [Section] other
+    #         another section to compare to this one
+    #
+    # @return [Bool]
+    #         whether contents are equal
+    #
     def ==(other)
       self.name == other.name \
         && self.items == other.items \
