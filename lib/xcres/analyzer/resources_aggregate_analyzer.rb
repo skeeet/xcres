@@ -13,10 +13,9 @@ module XCRes
   # which should be included in the output file.
   #
   # It is a +AggregateAnalyzer+, which uses the following child analyzers:
-  #  * +XCRes::ResourcesAnalyzer::BundleImageResourcesAnalyzer+
-  #  * +XCRes::ResourcesAnalyzer::LooseImageResourcesAnalyzer+
-  #  * +XCRes::ResourcesAnalyzer::XCAssetsAnalyzer+
-  #  * +XCRes::ResourcesAnalyzer::LooseSoundResourcesAnalyzer+
+  #  * +XCRes::CollectionsAnalyzer::BundleCollectionsAnalyzer+
+  #  * +XCRes::CollectionsAnalyzer::XCAssetsCollectionsAnalyzer+
+  #  * +XCRes::CollectionsAnalyzer::LooseFilesCollectionsAnalyzer+
   #
   class ResourcesAggregateAnalyzer < AggregateAnalyzer
 
