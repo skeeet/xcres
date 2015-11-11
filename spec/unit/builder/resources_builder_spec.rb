@@ -38,11 +38,12 @@ describe 'XCRes::ResourcesBuilder' do
 
     it 'should not add keys, which are protected keywords' do
       @builder.logger.expects(:warn).twice
-      @builder.add_section 'Test', {
+      section = XCRes::Section.new('Test', {
         'default' => 'Default.png',
         'cat' => 'cat.gif',
         'auto' => 'auto.jpg'
-      }
+      })
+      @builder.add_section(section)
       @builder.sections.should.be.eql?('Test' => { 'cat' => 'cat.gif' })
     end
   end
