@@ -9,6 +9,8 @@ module XCRes
     #
     class BaseCollectionsAnalyzer < Analyzer
 
+      # @return [Array<BaseResource>]
+      #         resources that should be recognized inside this container
       attr_accessor :linked_resources
 
       def initialize(target=nil, options={})
