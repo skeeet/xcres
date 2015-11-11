@@ -42,7 +42,7 @@ module XCRes
         bundle_files = find_files_in_dir(bundle_file_ref.real_path)
 
         log "Found bundle %s with #%s files.", bundle_file_ref.path, bundle_files.count
-        section_name = basename_without_ext(bundle_file_ref.path)
+
         section_hash = Hash.new
 
         linked_resources.each do |resource_type|
@@ -56,7 +56,10 @@ module XCRes
           section_hash[subsection_name] = new_section(subsection_name, subsection_data)
 	      end
 
-	    new_section(section_name, section_hash)
+        return nil if section_hash.empty?
+
+        section_name = basename_without_ext(bundle_file_ref.path)
+  	    new_section(section_name, section_hash)
       end
     end
   end

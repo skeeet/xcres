@@ -19,18 +19,14 @@ describe 'XCRes::CollectionsAnalyzer::BaseCollectionsAnalyzer' do
 
     it 'should initialize with one resource' do
       res = XCRes::ResourceTypes::ImageResource.new
-      a = subject.new(nil, {
-        :linked_resources => [ res ]
-      })
+      a = subject.new(nil, linked_resources: [ res ])
       a.linked_resources.should.eql?([ res ])
     end
 
     it 'should initialize with multiple resources' do
       res1 = XCRes::ResourceTypes::ImageResource.new
       res2 = XCRes::ResourceTypes::SoundResource.new
-      a = subject.new(nil, {
-        :linked_resources => [ res1, res2 ]
-      })
+      a = subject.new(nil, linked_resources: [ res1, res2 ])
       a.linked_resources.should.eql?([ res1, res2 ])
     end
   end
@@ -38,59 +34,6 @@ describe 'XCRes::CollectionsAnalyzer::BaseCollectionsAnalyzer' do
   describe '#find_files_in_dir' do
     # TODO: Test using fakefs, ...
   end
-
-  # describe '#build_images_section_data' do
-  #   it 'returns an empty hash if no files were given' do
-  #     @analyzer.build_images_section_data([]).should.eql?({})
-  #   end
-
-  #   describe 'option use_basename is not given' do
-  #     it 'builds an items hash and keep the path' do
-  #       @analyzer.build_images_section_data([Pathname('b/a.m'), Pathname('b/a.gif')])
-  #         .should.eql?({ 'b/a' => 'b/a.gif' })
-  #     end
-  #   end
-
-  #   describe 'option use_basename is given as []' do
-  #     it 'builds an items hash and keep the path' do
-  #       @analyzer.build_images_section_data([Pathname('b/a.m'), Pathname('b/a.gif')], use_basename: [])
-  #         .should.eql?({ 'b/a' => 'b/a.gif' })
-  #     end
-  #   end
-
-  #   describe 'option use_basename is given as [:key]' do
-  #     it 'builds an items hash and remove the path' do
-  #       @analyzer.build_images_section_data([Pathname('b/a.m'), Pathname('b/a.gif')], use_basename: [:key])
-  #         .should.eql?({ 'a' => 'b/a.gif' })
-  #     end
-  #   end
-
-  #   describe 'option use_basename is given as [:path]' do
-  #     it 'builds an items hash and remove the path' do
-  #       @analyzer.build_images_section_data([Pathname('b/a.m'), Pathname('b/a.gif')], use_basename: [:path])
-  #         .should.eql?({ 'b/a' => 'a.gif' })
-  #     end
-  #   end
-
-  #   describe 'option use_basename is given as [:key,:path]' do
-  #     it 'builds an items hash and remove the path' do
-  #       @analyzer.build_images_section_data([Pathname('b/a.m'), Pathname('b/a.gif')], use_basename: [:key, :path])
-  #         .should.eql?({ 'a' => 'a.gif' })
-  #     end
-  #   end
-  # end
-
-
-  # describe '#find_image_files' do
-  #   it 'returns a empty list if no files were given' do
-  #     @analyzer.find_image_files([]).should.eql?([])
-  #   end
-
-  #   it 'matches common image formats' do
-  #     @analyzer.find_image_files(['a.png', 'b.jpg', 'c.jpeg', 'd.gif', 'e.txt'])
-  #                    .should.eql?(['a.png', 'b.jpg', 'c.jpeg', 'd.gif'])
-  #   end
-  # end
 
   describe '#build_section_data' do
     before do

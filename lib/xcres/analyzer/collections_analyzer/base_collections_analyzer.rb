@@ -79,7 +79,7 @@ module XCRes
         key = path.to_s
 
         # Get rid of the file extension
-        key.sub! /#{File.extname(path)}$/, ''
+        key = key.sub /#{File.extname(path)}$/, ''
 
         # Graphical assets tend to contain words, which you want to strip.
         # Because we want to list the words to ignore only in one variant,
@@ -88,11 +88,11 @@ module XCRes
         key = key.underscore.downcase
 
         for filter_word in resource_type.filter_words do
-          key.gsub! filter_word, ''
+          key = key.gsub filter_word, ''
         end
 
         # Remove unnecessary underscores
-        key.gsub! /^_*|_*$|(_)_+/, '\1'
+        key = key.gsub /^_*|_*$|(_)_+/, '\1'
 
         return key
       end

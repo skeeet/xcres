@@ -44,6 +44,9 @@ module XCRes
       def build_section_for_xcassets bundle
 
         log "Found asset catalog %s with #%s resources.", bundle.path.basename, bundle.resources.count
+
+        return nil unless bundle_files.count > 0
+
         section_name = "#{basename_without_ext(bundle.path)}Assets"
         section_hash = Hash.new
 
