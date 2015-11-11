@@ -10,13 +10,13 @@ module XCRes
         return ['icon', 'image']
       end
 
-      def filter_files file_paths, options = {}
-        filtered_files = super(file_paths, options)
+      def filter_files file_paths
+        filtered_files = super(file_paths)
         return filter_device_specific_image_paths(filtered_files)
       end
 
       def match_file path
-        return path.to_s.match /\.(png|jpe?g|gif)$/
+        return !path.to_s.match(/\.(png|jpe?g|gif)$/).nil?
       end
 
       def resource_type

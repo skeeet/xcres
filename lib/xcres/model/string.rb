@@ -9,5 +9,13 @@ module XCRes
 			@value = value
 			@comment = comment
 		end
+
+	    def ==(other)
+	      self.key == other.key \
+	        && self.value == other.value \
+	        && self.comment == other.comment
+	    end
+
+	    alias eql? ==
 	end
 end

@@ -7,7 +7,7 @@ module XCRes
     class ImageXCAssetResource < ImageResource
 
       def match_file path
-        return path.to_s.match /\.(appiconset|imageset|launchimage)$/
+        return !path.to_s.match( /\.(appiconset|imageset|launchimage)$/).nil?
       end
     end
   end

@@ -11,7 +11,7 @@ module XCRes
       end
 
       def match_file path
-        return path.to_s.match /\.(caf|raw|wav|aiff?|mp3)$/
+        return !path.to_s.match(/\.(caf|raw|wav|aiff?|mp3)$/).nil?
       end
 
       def resource_type

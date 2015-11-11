@@ -11,7 +11,7 @@ module XCRes
       end
 
       def match_file path
-        return path.to_s.match /\.dataset$/
+        return !path.to_s.match(/\.dataset$/).nil?
       end
 
       def resource_type

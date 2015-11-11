@@ -9,7 +9,7 @@ module XCRes
         return []
       end
 
-      def filter_files file_paths, options = {}
+      def filter_files file_paths
         filtered_files = file_paths
         filtered_files.select! { |path| match_file(path) }
         return filtered_files

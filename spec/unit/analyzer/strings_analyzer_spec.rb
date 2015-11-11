@@ -252,10 +252,10 @@ describe 'XCRes::StringsAnalyzer' do
     it 'should return the string keys hash' do
       path = fixture_path + 'Example/Example/en.lproj/Localizable.strings'
       @analyzer.keys_by_file(path).should == {
-        "foo"          => { value: "foo",          comment: "Foo String"      },
-        "bar"          => { value: "bar",          comment: "Bar String"      },
-        "en_exclusive" => { value: "en_exclusive", comment: "Only in english" },
-        "example"      => { value: "example",      comment: "Lorem Ipsum"     },
+        "foo"          => XCRes::String.new('foo', 'foo', 'Foo String'),
+        "bar"          => XCRes::String.new('bar', 'bar', 'Bar String'),
+        "en_exclusive" => XCRes::String.new('en_exclusive', 'en_exclusive', 'Only in english'),
+        "example"      => XCRes::String.new('example', 'example', 'Lorem Ipsum'),
       }
     end
   end
