@@ -162,7 +162,7 @@ EOS
       h_file.writeln
       h_file.writeln '#import <Foundation/Foundation.h>'
       h_file.writeln
-      h_file.writeln 'extern const struct %s {' % resources_constant_name
+      h_file.writeln 'FOUNDATION_EXTERN const struct %s {' % resources_constant_name
       h_file.section do |struct|
         for section_key, section_content in @sections.sort
           fill_header_section(struct, '', section_key, section_content)
