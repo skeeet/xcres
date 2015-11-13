@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0613AB5F1BF635E700161357 /* MyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0613AB5E1BF635E700161357 /* MyView.xib */; };
+		0613AB611BF635F300161357 /* MyScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0613AB601BF635F300161357 /* MyScene.storyboard */; };
+		0613AB631BF6367600161357 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0613AB621BF6367600161357 /* LoginViewController.storyboard */; };
 		06B6973F1BF0CD0900DC9F6F /* mp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 06B6973E1BF0CD0900DC9F6F /* mp3.mp3 */; };
 		71239DA81912BFF70058657F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA71912BFF70058657F /* Foundation.framework */; };
 		71239DAA1912BFF70058657F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA91912BFF70058657F /* CoreGraphics.framework */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0613AB5E1BF635E700161357 /* MyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyView.xib; sourceTree = "<group>"; };
+		0613AB601BF635F300161357 /* MyScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyScene.storyboard; sourceTree = "<group>"; };
+		0613AB621BF6367600161357 /* LoginViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
 		06B6973E1BF0CD0900DC9F6F /* mp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mp3.mp3; sourceTree = "<group>"; };
 		06B697401BF0CD1B00DC9F6F /* aif.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = aif.aiff; sourceTree = "<group>"; };
 		711976AD19A392DE005748B4 /* nyanCat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nyanCat.png; sourceTree = "<group>"; };
@@ -103,6 +109,9 @@
 				715C078D198D029800316E8C /* Images */,
 				06B6973D1BF0CCF200DC9F6F /* Sounds */,
 				71239DAE1912BFF70058657F /* Supporting Files */,
+				0613AB5E1BF635E700161357 /* MyView.xib */,
+				0613AB601BF635F300161357 /* MyScene.storyboard */,
+				0613AB621BF6367600161357 /* LoginViewController.storyboard */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -180,10 +189,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0613AB631BF6367600161357 /* LoginViewController.storyboard in Resources */,
 				715C078F198D029800316E8C /* Icons.bundle in Resources */,
 				715C0790198D029800316E8C /* doge.jpeg in Resources */,
+				0613AB5F1BF635E700161357 /* MyView.xib in Resources */,
 				71239DB21912BFF80058657F /* InfoPlist.strings in Resources */,
 				06B6973F1BF0CD0900DC9F6F /* mp3.mp3 in Resources */,
+				0613AB611BF635F300161357 /* MyScene.storyboard in Resources */,
 				71239DBA1912BFF80058657F /* Media.xcassets in Resources */,
 				71239DDC1912C07E0058657F /* Localizable.strings in Resources */,
 			);

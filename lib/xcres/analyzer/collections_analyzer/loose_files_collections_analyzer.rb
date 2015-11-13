@@ -8,6 +8,15 @@ module XCRes
     #
     class LooseFilesCollectionsAnalyzer < BaseCollectionsAnalyzer
 
+      # @return [Bool]
+      #         whether the analyzer should include file extensions when building model representation
+      attr_accessor :use_filename_extension
+
+      def initialize(target=nil, options={})
+        @use_filename_extension = true
+        super(target, options)
+      end
+
       def analyze
         @sections = build_section_for_loose_files
         super
@@ -30,7 +39,10 @@ module XCRes
           log "Found #%s %s in the project.", relevant_files.count, resource_type.resource_type.downcase
 
           section_name = resource_type.resource_type
-          section_data = build_section_data(relevant_files, resource_type, use_basename: [:key, :path])
+          section_data = build_section_data(relevant_files, resource_type, {
+            use_basename: [:key, :path],
+            path_without_ext: !@use_filename_extension
+          })
           new_section(section_name, section_data)
         end.compact
       end

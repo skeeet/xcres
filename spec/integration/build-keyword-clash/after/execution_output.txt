@@ -6,6 +6,8 @@
 Ⓥ Found #0 asset catalogs in project.
 Ⓥ Found #0 images in the project.
 Ⓥ Found #0 sounds in the project.
+Ⓥ Found #0 nibs in the project.
+Ⓥ Found #0 storyboards in the project.
 Ⓥ Strings files in project: ["en.lproj/InfoPlist.strings"]
 Ⓥ Native development languages: ["en"]
 Ⓥ Used languages for .strings files: ["en"]

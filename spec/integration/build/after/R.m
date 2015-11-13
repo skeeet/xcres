@@ -29,8 +29,15 @@ const struct R R = {
             .launch = @"LaunchImage",
         },
     },
+    .Nibs = {
+        .myView = @"MyView",
+    },
     .Sounds = {
         .mp3 = @"mp3.mp3",
+    },
+    .Storyboards = {
+        .login = @"LoginViewController",
+        .my = @"MyScene",
     },
     .Strings = {
         .bar = @"bar",

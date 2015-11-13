@@ -20,6 +20,9 @@ File References:
     - Localizable.strings:
       - en
       - de
+  - MyView.xib
+  - MyScene.storyboard
+  - LoginViewController.storyboard
 - Frameworks:
   - Foundation.framework
   - CoreGraphics.framework
@@ -41,10 +44,13 @@ Targets:
       - UIKit.framework
       - Foundation.framework
     - ResourcesBuildPhase:
+      - LoginViewController.storyboard
       - Icons.bundle
       - doge.jpeg
+      - MyView.xib
       - InfoPlist.strings
       - mp3.mp3
+      - MyScene.storyboard
       - Media.xcassets
       - Localizable.strings
     Build Configurations:

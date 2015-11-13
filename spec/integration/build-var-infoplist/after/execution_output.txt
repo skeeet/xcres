@@ -14,6 +14,8 @@
 Ⓥ Add section for MediaAssets with 2 elements.
 Ⓥ Found #1 images in the project.
 Ⓥ Found #1 sounds in the project.
+Ⓥ Found #0 nibs in the project.
+Ⓥ Found #0 storyboards in the project.
 Ⓥ Strings files in project: ["en.lproj/InfoPlist.strings", "en.lproj/Localizable.strings", "de.lproj/Localizable.strings"]
 Ⓥ Native development languages: ["en"]
 Ⓥ Used languages for .strings files: ["en", "de"]

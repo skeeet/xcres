@@ -38,10 +38,20 @@ FOUNDATION_EXTERN const struct R {
             __unsafe_unretained NSString *launch;
         } Images;
     } MediaAssets;
+    struct Nibs {
+        /// MyView
+        __unsafe_unretained NSString *myView;
+    } Nibs;
     struct Sounds {
         /// mp3.mp3
         __unsafe_unretained NSString *mp3;
     } Sounds;
+    struct Storyboards {
+        /// LoginViewController
+        __unsafe_unretained NSString *login;
+        /// MyScene
+        __unsafe_unretained NSString *my;
+    } Storyboards;
     struct Strings {
         /// Bar String
         __unsafe_unretained NSString *bar;
