@@ -58,10 +58,10 @@ describe 'XCRes::XIBAnalyzer' do
           'id1' => 'Id1',
           'id2' => 'Id2' 
         })
-      @analyzer.build_section.should.be.eql?(XCRes::Section.new 'ReuseIdentifiers', { 'test_view' => {
+      @analyzer.build_section.should.be.eql?(XCRes::Section.new('ReuseIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
         'id1' => 'Id1',
         'id2' => 'Id2' 
-      }})
+      })}))
     end
   end
 
@@ -85,9 +85,9 @@ describe 'XCRes::XIBAnalyzer' do
     describe "complete reuse identifiers section" do
       it 'should return a section build for all reuse identifiers in all xib files' do
         path = fixture_path + 'Example/Example/TestView.xib'
-        @analyzer.build_section.should.be.eql?(XCRes::Section.new 'ReuseIdentifiers', { 'test_view' => {
+        @analyzer.build_section.should.be.eql?(XCRes::Section.new('ReuseIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
           'test_view_xib' => 'TestViewXib'
-        }})
+        })}))
       end
     end
   end

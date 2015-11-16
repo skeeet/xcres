@@ -42,6 +42,12 @@ FOUNDATION_EXTERN const struct R {
         /// MyView
         __unsafe_unretained NSString *myView;
     } Nibs;
+    struct ReuseIdentifiers {
+        struct ReuseIdentifiersMyView {
+            /// MyViewXib
+            __unsafe_unretained NSString *myViewXib;
+        } MyView;
+    } ReuseIdentifiers;
     struct Sounds {
         /// mp3.mp3
         __unsafe_unretained NSString *mp3;

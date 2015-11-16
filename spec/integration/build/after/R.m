@@ -32,6 +32,11 @@ const struct R R = {
     .Nibs = {
         .myView = @"MyView",
     },
+    .ReuseIdentifiers = {
+        .MyView = {
+            .myViewXib = @"MyViewXib",
+        },
+    },
     .Sounds = {
         .mp3 = @"mp3.mp3",
     },

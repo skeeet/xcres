@@ -1,5 +1,4 @@
 require 'xcres/analyzer/analyzer'
-require 'xcres/analyzer/resource_types/base_resource'
 
 module XCRes
   module CollectionsAnalyzer
@@ -55,7 +54,7 @@ module XCRes
           path_without_ext: false,
         }.merge options
 
-        # Transform image file paths to keys
+        # Transform file paths to keys
         keys_to_paths = {}
         for path in file_paths
           basename = File.basename(path)

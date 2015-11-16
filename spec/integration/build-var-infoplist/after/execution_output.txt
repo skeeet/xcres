@@ -23,4 +23,6 @@
 Ⓥ Strings files after language selection: ["en.lproj/InfoPlist.strings", "en.lproj/Localizable.strings"]
 Ⓥ Non-ignored .strings files: ["Example/Example/en.lproj/Localizable.strings"]
 Ⓥ Found 4 keys in file Example/Example/en.lproj/Localizable.strings
+Ⓥ Nib files in project: []
+Ⓥ Non-ignored .xib files: []
 ✓ Successfully updated: ROOT/tmp/integration/build-var-infoplist/R.h

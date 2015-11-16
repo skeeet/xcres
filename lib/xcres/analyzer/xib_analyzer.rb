@@ -33,8 +33,8 @@ module XCRes
       items = {}
       for path in rel_file_paths
         filename = path.relative_path_from(path.parent)
-        key = key_from_path(filename, ResourceTypes::XIBResource.new)
-        items[key] = keys_by_file(path)
+        key = filename.to_s.sub /#{File.extname(path)}$/, ''
+        items[key] = XCRes::Section.new(key, keys_by_file(path))
       end
 
       new_section('ReuseIdentifiers', items)

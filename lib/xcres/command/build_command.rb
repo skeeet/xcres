@@ -30,6 +30,7 @@ class XCRes::BuildCommand < XCRes::ProjectCommand
       analyzer.logger = logger
       analyzer.add_with_class(XCRes::ResourcesAggregateAnalyzer, shorten_keys: true)
       analyzer.add_with_class(XCRes::StringsAnalyzer, default_language: default_language)
+      analyzer.add_with_class(XCRes::XIBAnalyzer)
       sections = analyzer.analyze
 
       sections.each do |section|
