@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		060E879A1BF09E9900083714 /* mp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 060E87991BF09E9900083714 /* mp3.mp3 */; };
+		06DD88821BFA2597007292D8 /* TestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06DD88811BFA2596007292D8 /* TestView.xib */; };
+		06DD88841BFA25A3007292D8 /* TestMyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06DD88831BFA25A3007292D8 /* TestMyStoryboard.storyboard */; };
+		06DD88861BFA25AE007292D8 /* TestMyScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06DD88851BFA25AE007292D8 /* TestMyScene.storyboard */; };
+		06DD88881BFA25B7007292D8 /* OtherName.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06DD88871BFA25B7007292D8 /* OtherName.storyboard */; };
 		711976B119A3A1BE005748B4 /* doge.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 711976AF19A3A1BE005748B4 /* doge.jpeg */; };
 		71239DA81912BFF70058657F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA71912BFF70058657F /* Foundation.framework */; };
 		71239DAA1912BFF70058657F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA91912BFF70058657F /* CoreGraphics.framework */; };
@@ -22,6 +26,10 @@
 /* Begin PBXFileReference section */
 		060E87991BF09E9900083714 /* mp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mp3.mp3; sourceTree = "<group>"; };
 		060E879B1BF09EAC00083714 /* aif.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = aif.aiff; sourceTree = "<group>"; };
+		06DD88811BFA2596007292D8 /* TestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestView.xib; sourceTree = "<group>"; };
+		06DD88831BFA25A3007292D8 /* TestMyStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestMyStoryboard.storyboard; sourceTree = "<group>"; };
+		06DD88851BFA25AE007292D8 /* TestMyScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestMyScene.storyboard; sourceTree = "<group>"; };
+		06DD88871BFA25B7007292D8 /* OtherName.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OtherName.storyboard; sourceTree = "<group>"; };
 		711976AF19A3A1BE005748B4 /* doge.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = doge.jpeg; sourceTree = "<group>"; };
 		711976B019A3A1BE005748B4 /* nyanCat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nyanCat.png; sourceTree = "<group>"; };
 		71239DA41912BFF70058657F /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +117,10 @@
 				711976AE19A3A1BD005748B4 /* Images */,
 				060E87981BF09E8800083714 /* Sounds */,
 				71239DAE1912BFF70058657F /* Supporting Files */,
+				06DD88811BFA2596007292D8 /* TestView.xib */,
+				06DD88831BFA25A3007292D8 /* TestMyStoryboard.storyboard */,
+				06DD88851BFA25AE007292D8 /* TestMyScene.storyboard */,
+				06DD88871BFA25B7007292D8 /* OtherName.storyboard */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -177,6 +189,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06DD88821BFA2597007292D8 /* TestView.xib in Resources */,
+				06DD88861BFA25AE007292D8 /* TestMyScene.storyboard in Resources */,
+				06DD88841BFA25A3007292D8 /* TestMyStoryboard.storyboard in Resources */,
+				06DD88881BFA25B7007292D8 /* OtherName.storyboard in Resources */,
 				711976B119A3A1BE005748B4 /* doge.jpeg in Resources */,
 				060E879A1BF09E9900083714 /* mp3.mp3 in Resources */,
 				71239DB21912BFF80058657F /* InfoPlist.strings in Resources */,

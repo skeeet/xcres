@@ -1,4 +1,5 @@
 require File.expand_path('../../spec_helper', __FILE__)
+# require 'xcres/analyzer/xib_analyzer'
 
 describe 'XCRes::XIBAnalyzer' do
 
@@ -23,7 +24,6 @@ describe 'XCRes::XIBAnalyzer' do
       @analyzer.target.should.be.eql?(@target)
       @analyzer.project.should.be.eql?(@project)
     end
-
   end
 
   describe "#analyze" do
@@ -53,187 +53,64 @@ describe 'XCRes::XIBAnalyzer' do
       })
       @analyzer.stubs(:xib_file_refs).returns([xib_file_ref])
       @analyzer.stubs(:keys_by_file)
-        .with(Pathname('./TestView.xib'))
-        .returns({ 'TestView' => [ 'Id1', 'Id2' ]})
-      @analyzer.build_section.should.be.eql?(XCRes::Section.new 'ReuseIdentifiers', { 'TestView' => ['Id1', 'Id2'] })
+        .with(Pathname('TestView.xib'))
+        .returns({
+          'id1' => 'Id1',
+          'id2' => 'Id2' 
+        })
+      @analyzer.build_section.should.be.eql?(XCRes::Section.new 'ReuseIdentifiers', { 'test_view' => {
+        'id1' => 'Id1',
+        'id2' => 'Id2' 
+      }})
     end
   end
 
-  # describe "with fixture project" do
-  #   before do
-  #     @target = app_target
-  #     @analyzer = subject.new(@target)
-  #     @analyzer.logger = stub('Logger', :log)
-  #     @analyzer.expects(:warn).never
-  #     @analyzer.expects(:error).never
-  #   end
+  describe "with fixture project" do
+    before do
+      @target = app_target
+      @analyzer = subject.new(@target)
+      @analyzer.logger = stub('Logger', :log)
+      @analyzer.expects(:warn).never
+      @analyzer.expects(:error).never
+    end
 
-  #   describe "#strings_file_refs" do
-  #     it 'should return the strings files of the fixture project' do
-  #       strings_files = @analyzer.strings_file_refs
-  #       strings_files.count.should.be.eql?(3)
-  #       strings_files[0].path.should.be.eql?('en.lproj/InfoPlist.strings')
-  #       strings_files[1].path.should.be.eql?('en.lproj/Localizable.strings')
-  #       strings_files[2].path.should.be.eql?('de.lproj/Localizable.strings')
-  #     end
-  #   end
+    describe "#xib_file_refs" do
+      it 'should return the xib files of the fixture project' do
+        xib_files = @analyzer.xib_file_refs
+        xib_files.count.should.be.eql?(1)
+        xib_files[0].path.should.be.eql?('TestView.xib')
+      end
+    end
 
-  #   describe '#derive_used_languages' do
-  #     it 'should find used languages' do
-  #       languages = @analyzer.derive_used_languages(@analyzer.strings_file_refs)
-  #       languages.should == ['en', 'de'].to_set
-  #     end
-  #   end
+    describe "complete reuse identifiers section" do
+      it 'should return a section build for all reuse identifiers in all xib files' do
+        path = fixture_path + 'Example/Example/TestView.xib'
+        @analyzer.build_section.should.be.eql?(XCRes::Section.new 'ReuseIdentifiers', { 'test_view' => {
+          'test_view_xib' => 'TestViewXib'
+        }})
+      end
+    end
+  end
 
-  #   describe '#used_languages' do
-  #     it 'should return english and german as used languages' do
-  #       @analyzer.used_languages.should == ['en', 'de'].to_set
-  #     end
-  #   end
+  describe "#read_xib_file" do
+    it 'should read a valid file' do
+      path = fixture_path + 'Example/Example/TestView.xib'
+      file_contents = File.read(path)
+      @analyzer.read_xib_file(path).should == file_contents
+    end
 
-  #   describe '#info_plist_paths' do
-  #     it 'should return a set with the configured paths of the project' do
-  #       @analyzer.info_plist_paths.should == [Pathname('Example/Example-Info.plist')].to_set
-  #     end
-  #   end
+    it 'should raise an error for not existing file file' do
+      proc do
+        @analyzer.read_xib_file(fixture_path + 'Example/Example/NotExisting.xib')
+      end.should.raise(ArgumentError).message.should.include "doesn't exist"
+    end
+  end
 
-  #   describe '#absolute_info_plist_paths' do
-  #     it 'should resolve the path if it is relative' do
-  #       @analyzer.absolute_project_file_path('Info.plist')
-  #         .relative_path_from(fixture_path)
-  #         .should == Pathname('Example/Info.plist')
-  #     end
-
-  #     it 'should resolve the path if $SRCROOT is used' do
-  #       @analyzer.absolute_project_file_path('$SRCROOT/Info.plist')
-  #         .relative_path_from(fixture_path)
-  #         .should == Pathname('Example/Info.plist')
-  #     end
-  #   end
-
-  #   describe '#native_dev_languages' do
-  #     it 'should return english' do
-  #       @analyzer.native_dev_languages.should == ['en'].to_set
-  #     end
-
-  #     describe 'with non-configured Info.plist' do
-  #       it 'should warn on missing plists' do
-  #         @target.build_configurations[0].build_settings['INFOPLIST_FILE'] = 'NonExisting.plist'
-  #         @analyzer.expects(:warn).once
-  #         @analyzer.native_dev_languages.should == ['en'].to_set
-  #       end
-  #     end
-  #   end
-
-  #   describe '#read_plist_key' do
-  #     before do
-  #       @plist_path = fixture_path + 'Example/Example/Example-Info.plist'
-  #     end
-
-  #     it 'should read and return existing keys' do
-  #       @analyzer.read_plist_key(@plist_path, :CFBundleDevelopmentRegion)
-  #         .should == 'en'
-  #     end
-
-  #     it 'should raise an ArgumentError on non-existing files' do
-  #       plist_path = Pathname('NonExisting.plist')
-  #       proc do
-  #         @analyzer.read_plist_key(plist_path, :XCResNonExistingKey)
-  #       end.should.raise(ArgumentError).message
-  #         .should == "File 'NonExisting.plist' doesn't exist"
-  #     end
-
-  #     it 'should raise an ArgumentError on non-existing keys' do
-  #       proc do
-  #         @analyzer.read_plist_key(@plist_path, :XCResNonExistingKey)
-  #       end.should.raise(ArgumentError).message
-  #         .should == 'Error reading plist: Print: Entry, ":XCResNonExistingKey", Does Not Exist'
-  #     end
-  #   end
-
-  #   describe '#absolute_project_file_path' do
-  #     it 'should treat relative paths correctly' do
-  #       @analyzer.absolute_project_file_path('Info.plist')
-  #         .relative_path_from(fixture_path)
-  #         .should == Pathname('Example/Info.plist')
-  #     end
-
-  #     it 'should replace $SRCROOT with project path' do
-  #       @analyzer.absolute_project_file_path('$SRCROOT/Info.plist')
-  #         .relative_path_from(fixture_path)
-  #         .should == Pathname('Example/Info.plist')
-  #     end
-
-  #     it 'should replace ${SRCROOT} with project path' do
-  #       @analyzer.absolute_project_file_path('${SRCROOT}/Info.plist')
-  #         .relative_path_from(fixture_path)
-  #         .should == Pathname('Example/Info.plist')
-  #     end
-
-  #     it 'should replace $(SRCROOT) with project path' do
-  #       @analyzer.absolute_project_file_path('$(SRCROOT)/Info.plist')
-  #         .relative_path_from(fixture_path)
-  #         .should == Pathname('Example/Info.plist')
-  #     end
-  #   end
-
-  #   describe '#selected_strings_file_refs' do
-  #     describe 'for english development language' do
-  #       before do
-  #         @analyzer.stubs(:languages).returns ['en']
-  #       end
-
-  #       it 'should return the selected strings file refs' do
-  #         strings_files = @analyzer.selected_strings_file_refs
-  #         strings_files.count.should.be.eql?(2)
-  #         strings_files[0].path.should.be.eql?('en.lproj/InfoPlist.strings')
-  #         strings_files[1].path.should.be.eql?('en.lproj/Localizable.strings')
-  #       end
-  #     end
-
-  #     describe 'for german development language' do
-  #       before do
-  #         @analyzer.stubs(:languages).returns ['de']
-  #       end
-
-  #       it 'should return the selected strings file refs' do
-  #         @analyzer.stubs(:languages).returns ['de']
-  #         strings_files = @analyzer.selected_strings_file_refs
-  #         strings_files.count.should.be.eql?(1)
-  #         strings_files[0].path.should.be.eql?('de.lproj/Localizable.strings')
-  #       end
-  #     end
-  #   end
-  # end
-
-  # describe "#read_xib_file" do
-  #   it 'should read a valid file' do
-  #     @analyzer.read_strings_file(fixture_path + 'Example/Example/en.lproj/Localizable.strings').should == {
-  #       "foo"               => "Foo String",
-  #       "bar"               => "Bar String",
-  #       "en_exclusive"      => "Only in english",
-  #       "example"           => "Lorem Ipsum",
-  #       "123-abc-3e7.text"  => "Hello Storyboards",
-  #     }
-  #   end
-
-  #   it 'should raise an error for an invalid file' do
-  #     proc do
-  #       @analyzer.read_strings_file(fixture_path + 'StringsFiles/syntax_error_missing_semicolon.strings')
-  #     end.should.raise(StandardError).message.should.include "Old-style plist parser: missing semicolon in dictionary on line 2."
-  #   end
-  # end
-
-  # describe "#keys_by_file" do
-  #   it 'should return the string keys hash' do
-  #     path = fixture_path + 'Example/Example/en.lproj/Localizable.strings'
-  #     @analyzer.keys_by_file(path).should == {
-  #       "foo"          => XCRes::String.new('foo', 'foo', 'Foo String'),
-  #       "bar"          => XCRes::String.new('bar', 'bar', 'Bar String'),
-  #       "en_exclusive" => XCRes::String.new('en_exclusive', 'en_exclusive', 'Only in english'),
-  #       "example"      => XCRes::String.new('example', 'example', 'Lorem Ipsum'),
-  #     }
-  #   end
-  # end
+  describe "#keys_by_file" do
+    it 'should return the reuse identifier hash for given xib' do
+      path = fixture_path + 'Example/Example/TestView.xib'
+      @analyzer.keys_by_file(path).should == { 'test_view_xib' => 'TestViewXib' }
+    end
+  end
 
 end

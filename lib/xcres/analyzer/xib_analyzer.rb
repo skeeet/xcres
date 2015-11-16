@@ -1,9 +1,10 @@
 require 'xcres/analyzer/analyzer'
+require 'xcres/analyzer/resource_types/xib_resource'
 require 'nokogiri'
 
 module XCRes
 
-  # A +StringsAnalyzer+ scans the project for resources,
+  # A +XIBAnalyzer+ scans the project for identifiers inside xib files,
   # which should be included in the output file.
   #
   class XIBAnalyzer < Analyzer
@@ -29,16 +30,17 @@ module XCRes
 
       log 'Non-ignored .xib files: %s', rel_file_paths.map(&:to_s)
 
-      keys_by_file = {}
+      items = {}
       for path in rel_file_paths
-        keys_by_file[path] = keys_by_file(path)
+        filename = path.relative_path_from(path.parent)
+        key = key_from_path(filename, ResourceTypes::XIBResource.new)
+        items[key] = keys_by_file(path)
       end
-      items = keys_by_file.values.reduce({}, :merge)
 
       new_section('ReuseIdentifiers', items)
     end
 
-    # Discover all references to .strings files in project (e.g. Localizable.strings)
+    # Discover all references to .xib files in project
     #
     # @return [Array<PBXFileReference>]
     #
@@ -49,39 +51,42 @@ module XCRes
     # Read a .xib file given as a path
     #
     # @param [Pathname] path
-    #        the path of the strings file
+    #        the path of the .xib file
     #
     # @return [Hash]
     #
     def read_xib_file(path)
-      raise ArgumentError, "File '#{path}' doesn't exist" unless path.exist?
-      raise ArgumentError, "File '#{path}' is not a file" unless path.file?
-      error = `plutil -lint -s "#{path}" 2>&1`
-      raise ArgumentError, "File %s is malformed:\n#{error}" % path.to_s unless $?.success?
-      json_or_error = `plutil -convert json "#{path}" -o -`.chomp
-      raise ArgumentError, "File %s couldn't be converted to JSON.\n#{json_or_error}" % path.to_s unless $?.success?
-      JSON.parse(json_or_error.force_encoding('UTF-8'))
-    rescue EncodingError => e
-      raise StandardError, "Encoding error in #{path}: #{e}"
+      begin
+        raise ArgumentError, "File '#{path}' doesn't exist" unless path.exist?
+        raise ArgumentError, "File '#{path}' is not a file" unless path.file?
+        return path.read
+      rescue EncodingError => e
+        raise StandardError, "Encoding error in #{path}: #{e}"
+        return nil
+      end
     end
 
     # Read a file and collect all its keys
     #
     # @param  [Pathname] path
-    #         the path to the .strings file to read
+    #         the path to the .xib file to read
     #
     # @return [Hash{String => Hash}]
     #
     def keys_by_file(path)
       begin
         # Load strings file contents
-        xibs = read_xib_file(path)
+        xib = read_xib_file(path)
+        doc = Nokogiri::XML(xib)
+        attr_name = 'reuseIdentifier'
 
-        keys = Hash[xibs.map do |key, value|
-          # TODO: Analyze xml and add for key
-          found_identifiers = []
-          [key, found_identifiers]
-        end]
+        keys = {}
+
+        doc.xpath("//*[@#{attr_name}]").each do |n|
+          identifier = n.attribute(attr_name).to_s
+          id_key = key_from_path(identifier)
+          keys[id_key] = identifier
+        end
 
         log 'Found %s reuse identifiers in file %s', keys.count, path
 

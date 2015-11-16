@@ -4,6 +4,7 @@ require 'xcres/builder/resources_builder'
 require 'xcres/analyzer/aggregate_analyzer'
 require 'xcres/analyzer/resources_aggregate_analyzer'
 require 'xcres/analyzer/strings_analyzer'
+require 'xcres/analyzer/xib_analyzer'
 
 # The +BuildCommand+ builds the resources index files.
 #
