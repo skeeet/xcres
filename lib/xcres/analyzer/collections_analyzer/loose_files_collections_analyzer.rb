@@ -8,13 +8,20 @@ module XCRes
     #
     class LooseFilesCollectionsAnalyzer < BaseCollectionsAnalyzer
 
+      DEFAULTS = {
+        use_filename_extension: true
+      }
+
       # @return [Bool]
       #         whether the analyzer should include file extensions when building model representation
       attr_accessor :use_filename_extension
 
       def initialize(target=nil, options={})
-        @use_filename_extension = true
-        super(target, options)
+
+        opts = DEFAULTS.merge(options)
+
+        @use_filename_extension = opts[:use_filename_extension]
+        super(target, opts)
       end
 
       def analyze
