@@ -9,16 +9,26 @@
 
 const struct R R = {
     .Icons = {
-        .tabBarList = @"tab_bar/tabbar_list.png",
-        .tabBarMap = @"tab_bar/tabbar_map.png",
+        .Images = {
+            .tabBarTabbarList = @"tab_bar/tabbar_list.png",
+            .tabBarTabbarMap = @"tab_bar/tabbar_map.png",
+        },
     },
     .Images = {
         .doge = @"doge.jpeg",
     },
-    .ImagesAssets = {
-        .app = @"AppIcon",
-        .doge = @"Doge",
-        .launch = @"LaunchImage",
+    .MediaAssets = {
+        .Data = {
+            .aif = @"aif",
+        },
+        .Images = {
+            .app = @"AppIcon",
+            .doge = @"Doge",
+            .launch = @"LaunchImage",
+        },
+    },
+    .Sounds = {
+        .aif = @"aif.aiff",
     },
     .Strings = {
         .bar = @"bar",

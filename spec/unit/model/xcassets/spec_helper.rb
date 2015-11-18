@@ -9,7 +9,7 @@ module XCAssetsSpec
 
   module Helper
     def xcassets_fixture_path
-      fixture_path + 'Example/Example/Images.xcassets'
+      fixture_path + 'Example/Example/Media.xcassets'
     end
 
     def imageset_fixture_path

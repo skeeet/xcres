@@ -9,25 +9,55 @@
 
 FOUNDATION_EXTERN const struct R {
     struct Icons {
-        /// tab_bar/tabbar_list.png
-        __unsafe_unretained NSString *tabBarList;
-        /// tab_bar/tabbar_map.png
-        __unsafe_unretained NSString *tabBarMap;
+        struct IconsImages {
+            /// tab_bar/tabbar_list.png
+            __unsafe_unretained NSString *tabBarTabbarList;
+            /// tab_bar/tabbar_map.png
+            __unsafe_unretained NSString *tabBarTabbarMap;
+        } Images;
     } Icons;
     struct Images {
         /// doge.jpeg
         __unsafe_unretained NSString *doge;
     } Images;
-    struct ImagesAssets {
-        /// AppIcon
-        __unsafe_unretained NSString *app;
-        /// GrumpyCat
-        __unsafe_unretained NSString *catsGrumpy;
-        /// Doge
-        __unsafe_unretained NSString *doge;
-        /// LaunchImage
-        __unsafe_unretained NSString *launch;
-    } ImagesAssets;
+    struct MediaAssets {
+        struct MediaAssetsData {
+            /// MP3
+            __unsafe_unretained NSString *mp3;
+            /// Aif
+            __unsafe_unretained NSString *soundsAif;
+        } Data;
+        struct MediaAssetsImages {
+            /// AppIcon
+            __unsafe_unretained NSString *app;
+            /// GrumpyCat
+            __unsafe_unretained NSString *catsGrumpyCat;
+            /// Doge
+            __unsafe_unretained NSString *doge;
+            /// LaunchImage
+            __unsafe_unretained NSString *launch;
+        } Images;
+    } MediaAssets;
+    struct Nibs {
+        /// MyView
+        __unsafe_unretained NSString *myView;
+    } Nibs;
+    struct ReuseIdentifiers {
+        struct ReuseIdentifiersMyView {
+            /// MyViewXib
+            __unsafe_unretained NSString *myViewXib;
+        } MyView;
+    } ReuseIdentifiers;
+    struct Sounds {
+        /// mp3.mp3
+        __unsafe_unretained NSString *mp3;
+    } Sounds;
+    struct Storyboards {
+        /// LoginViewController
+        __unsafe_unretained NSString *login;
+        /// MyScene
+        __unsafe_unretained NSString *my;
+    } Storyboards;
     struct Strings {
         /// Bar String
         __unsafe_unretained NSString *bar;

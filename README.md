@@ -10,7 +10,7 @@
 as struct constants. So you will never have to reference a resource, without
 knowing already at compile time if it exists or not.
 
-It includes **loose images**, **.bundles**, **asset catalogs** (.xcasset)
+It includes **loose images**, **loose sounds**, **.bundles**, **asset catalogs** (.xcasset)
 and even **.strings** in the index.
 
 It gives you **code autocompletion** for resources and localized string keys,
@@ -42,20 +42,31 @@ FOUNDATION_EXTERN const struct R {
         /// doge.jpeg
         __unsafe_unretained NSString *doge;
     } Images;
-    struct ImagesAssets {
-        /// AppIcon
-        __unsafe_unretained NSString *app;
-        /// LaunchImage
-        __unsafe_unretained NSString *launch;
-        /// DefaultAvatar
-        __unsafe_unretained NSString *defaultAvatar;
-    } ImagesAssets;
+    struct MediaAssets {
+        struct MediaAssetsImages {
+            /// AppIcon
+            __unsafe_unretained NSString *app;
+            /// LaunchImage
+            __unsafe_unretained NSString *launch;
+            /// DefaultAvatar
+            __unsafe_unretained NSString *defaultAvatar;
+        } Images;
+        struct MediaAssetsData {
+            /// CustomDataSet
+            __unsafe_unretained NSString *customDataSet;
+        } Data;
+    } MediaAssets;
     struct Strings {
         /// Password wrong!
         __unsafe_unretained NSString *errorTitleWrongPassword;
         /// Please enter the correct password.
         __unsafe_unretained NSString *errorMessageWrongPassword;
     } Strings;
+    struct Sounds {
+        /// bell.caf
+        __unsafe_unretained NSString *bell;
+    } Sounds;
+  }
 } R;
 ```
 
@@ -101,7 +112,32 @@ Instead of:
 Just write:
 
 ```objc
-[UIImage imageNamed:R.ImagesAssets.personDefaultAvatar]
+[UIImage imageNamed:R.MediaAssets.Images.personDefaultAvatar]
+```
+
+##### How to Add a New Resource
+
+1. Add it to your asset catalog.
+- Trigger a build. (**⌘ + B**)
+- The new key will be available under
+  `R.${catalogName}Assets.${keyName:camelCase}`
+  and is ready for use in your code now.
+
+### Bundles
+
+Assuming your bundle is named `Stuff.bundle`.  
+`xcres` supports multiple bundles in one project.
+
+Instead of:
+
+```objc
+[UIImage imageNamed:@"Stuff.bundle/PersonDefaultAvatar"]
+```
+
+Just write:
+
+```objc
+[UIImage imageNamed:R.Stuff.Images.personDefaultAvatar]
 ```
 
 ##### How to Add a New Resource

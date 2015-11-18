@@ -1,6 +1,7 @@
 require 'xcodeproj'
 require 'xcres/helper/file_helper'
 require 'xcres/model/section'
+require 'xcres/analyzer/resource_types/base_resource'
 
 module XCRes
 
@@ -137,5 +138,35 @@ module XCRes
       end.flatten.compact
     end
 
+    # Derive a key from a resource path
+    #
+    # @param  [String] path
+    #         the path to the resource
+    #
+    # @return [String]
+    #
+    def key_from_path path, resource_type = nil
+        key = path.to_s
+
+        # Get rid of the file extension
+        key = key.sub /#{File.extname(path)}$/, ''
+
+        # Graphical assets tend to contain words, which you want to strip.
+        # Because we want to list the words to ignore only in one variant,
+        # we have to ensure that the icon name is prepared for that, without
+        # loosing word separation if camel case was used.
+        key = key.underscore.downcase
+
+        if !resource_type.nil? then
+            for filter_word in resource_type.filter_words do
+                key = key.gsub filter_word, ''
+            end
+        end
+
+        # Remove unnecessary underscores
+        key = key.gsub /^_*|_*$|(_)_+/, '\1'
+
+        return key
+    end
   end
 end

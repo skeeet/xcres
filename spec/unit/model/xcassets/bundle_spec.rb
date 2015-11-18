@@ -46,6 +46,9 @@ module XCAssetsSpec
           Pathname('Cats/GrumpyCat.imageset'),
           Pathname('Doge.imageset'),
           Pathname('LaunchImage.launchimage'),
+          Pathname('Sounds/Aif.dataset'),
+          Pathname('Sounds/MP3.dataset'),
+          Pathname('Wav.dataset'),
         ]
       end
 
@@ -74,12 +77,7 @@ module XCAssetsSpec
           end
 
           it 'should match the images' do
-            @res.images.should.be.eql? [
-              ResourceImage.new(idiom: 'iphone', scale: 2, size: '29x29'),
-              ResourceImage.new(idiom: 'iphone', scale: 2, size: '40x40'),
-              ResourceImage.new(idiom: 'iphone', scale: 2, size: '60x60'),
-              ResourceImage.new(idiom: 'iphone', scale: 3, size: '60x60'),
-            ]
+            @res.images.should.be.eql? []
           end
         end
 

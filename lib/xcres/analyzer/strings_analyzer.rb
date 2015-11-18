@@ -1,4 +1,5 @@
 require 'xcres/analyzer/analyzer'
+require 'xcres/model/string'
 require 'json'
 
 module XCRes
@@ -236,7 +237,7 @@ module XCRes
         strings.reject! { |key, _| /^[a-zA-Z0-9]{3}(-[a-zA-Z0-9]{3}){2}/.match(key) }
 
         keys = Hash[strings.map do |key, value|
-          [key, { value: key, comment: value.gsub(/[\r\n]/, ' ') }]
+          [key, XCRes::String.new(key, key, value.gsub(/[\r\n]/, ' '))]
         end]
 
         log 'Found %s keys in file %s', keys.count, path

@@ -3,12 +3,19 @@
 ⚠ Argument XCODEPROJ is a directory. Try to locate the Xcode project in this directory.
 ✓ Use Example/Example.xcodeproj as XCODEPROJ.
 Ⓥ Found #1 resource bundles in project.
-Ⓥ Found bundle Icons.bundle with #4 image files of #5 total files.
-Ⓥ Add section for Icons with 2 elements
-Ⓥ Found #1 image files in project.
+Ⓥ Found bundle Icons.bundle with #6 files.
+Ⓥ Found #2 images in the bundle.
+Ⓥ Found #0 sounds in the bundle.
+Ⓥ Add section for Icons with 2 elements.
 Ⓥ Found #1 asset catalogs in project.
-Ⓥ Found asset catalog Images.xcassets with #4 image files.
-Ⓥ Add section for ImagesAssets with 4 elements
+Ⓥ Found asset catalog Media.xcassets with #6 resources.
+Ⓥ Found #4 images in the asset catalog.
+Ⓥ Found #2 data in the asset catalog.
+Ⓥ Add section for MediaAssets with 2 elements.
+Ⓥ Found #1 images in the project.
+Ⓥ Found #1 sounds in the project.
+Ⓥ Found #1 nibs in the project.
+Ⓥ Found #2 storyboards in the project.
 Ⓥ Strings files in project: ["en.lproj/InfoPlist.strings", "en.lproj/Localizable.strings", "de.lproj/Localizable.strings"]
 Ⓥ Native development languages: ["en"]
 Ⓥ Used languages for .strings files: ["en", "de"]
@@ -16,4 +23,7 @@
 Ⓥ Strings files after language selection: ["en.lproj/InfoPlist.strings", "en.lproj/Localizable.strings"]
 Ⓥ Non-ignored .strings files: ["Example/Example/en.lproj/Localizable.strings"]
 Ⓥ Found 4 keys in file Example/Example/en.lproj/Localizable.strings
+Ⓥ Nib files in project: ["MyView.xib"]
+Ⓥ Non-ignored .xib files: ["Example/Example/MyView.xib"]
+Ⓥ Found 1 reuse identifiers in file Example/Example/MyView.xib
 ✓ Successfully updated: ROOT/tmp/integration/build/R.h

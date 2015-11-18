@@ -9,9 +9,11 @@
 
 FOUNDATION_EXTERN const struct R {
     struct ImagesAssets {
-        /// AppIcon
-        __unsafe_unretained NSString *app;
-        /// LaunchImage
-        __unsafe_unretained NSString *launch;
+        struct ImagesAssetsImages {
+            /// AppIcon
+            __unsafe_unretained NSString *app;
+            /// LaunchImage
+            __unsafe_unretained NSString *launch;
+        } Images;
     } ImagesAssets;
 } R;

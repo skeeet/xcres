@@ -29,7 +29,7 @@ EOS
   attr_accessor :documented
   alias :documented? :documented
 
-  # @return [Hash{String => {String => String}}]
+  # @return [Hash{String => {String => String}|{String => {String => String}}}]
   #         the sections, which will been written to the built files
   attr_reader :sections
 
@@ -48,30 +48,39 @@ EOS
     @resources_constant_name ||= basename_without_ext output_path
   end
 
-  def add_section name, items, options = {}
-    raise ArgumentError.new 'No items given!' if items.nil?
+  def transform_section_contents section
+    raise ArgumentError.new 'No items given!' if section.items.nil?
 
     transformed_items = {}
 
-    for key, value in items
-      transformed_key = transform_key key, options
+    for key, value in section.items
 
-      # Skip invalid key names
-      if transformed_key.length == 0
-        logger.warn "Skip invalid key: '%s'. (Was transformed to empty text)", key
-        next
+      if value.is_a? XCRes::Section then
+        transformed_items[key] = transform_section_contents(value)
+      else
+        transformed_key = transform_key(key)
+
+        # Skip invalid key names
+        if transformed_key.length == 0
+          logger.warn "Skip invalid key: '%s'. (Was transformed to empty text)", key
+          next
+        end
+
+        # Skip compiler keywords
+        if COMPILER_KEYWORDS.include? transformed_key
+          logger.warn "Skip invalid key: '%s'. (Was transformed to keyword '%s')", key, transformed_key
+          next
+        end
+
+        transformed_items[transformed_key] = value
       end
-
-      # Skip compiler keywords
-      if COMPILER_KEYWORDS.include? transformed_key
-        logger.warn "Skip invalid key: '%s'. (Was transformed to keyword '%s')", key, transformed_key
-        next
-      end
-
-      transformed_items[transformed_key] = value
     end
 
-    @sections[name] = transformed_items
+    return transformed_items
+  end
+
+  def add_section section
+    @sections[section.name] = transform_section_contents(section)
   end
 
   def build
@@ -89,7 +98,7 @@ EOS
 
   protected
 
-    def transform_key key, options
+    def transform_key key, options = {}
       # Split the key into components
       components = key.underscore.split /[_\/ ]/
 
@@ -121,6 +130,33 @@ EOS
       result
     end
 
+    def fill_header_section struct, parent_key, section_key, section_content
+
+      return unless section_content.length > 0
+      
+      struct.writeln 'struct %s%s {' % [parent_key, section_key]
+      for key, value in section_content.sort
+        if value.is_a? Hash then
+          struct.section do |substruct|
+            fill_header_section(substruct, section_key, key, value)
+          end
+        else
+          struct.section do |substruct|
+            comment = nil
+            if value.is_a? XCRes::String then
+              comment = value.comment
+              value = value.value
+            end
+            if documented?
+              substruct.writeln '/// %s' % (comment || value) #unless comment.nil?
+            end
+            substruct.writeln '__unsafe_unretained NSString *%s;' % key
+          end
+        end
+      end
+      struct.writeln '} %s;' % section_key
+    end
+
     def build_header_contents h_file
       h_file.writeln BANNER
       h_file.writeln
@@ -128,22 +164,33 @@ EOS
       h_file.writeln
       h_file.writeln 'FOUNDATION_EXTERN const struct %s {' % resources_constant_name
       h_file.section do |struct|
-        enumerate_sections do |section_key, enumerate_keys, contents_count|
-          if contents_count > 0
-            struct.writeln 'struct %s {' % section_key
-            struct.section do |section_struct|
-              enumerate_keys.call do |key, value, comment|
-                if documented?
-                  section_struct.writeln '/// %s' % (comment || value) #unless comment.nil?
-                end
-                section_struct.writeln '__unsafe_unretained NSString *%s;' % key
-              end
-            end
-            struct.writeln '} %s;' % section_key
-          end
+        for section_key, section_content in @sections.sort
+          fill_header_section(struct, '', section_key, section_content)
         end
       end
       h_file.writeln '} %s;' % resources_constant_name
+    end
+
+    def fill_impl_section struct, section_key, section_content
+
+      return unless section_content.length > 0
+
+      struct.writeln '.%s = {' % section_key
+      for key, value in section_content.sort
+        if value.is_a? Hash then
+          struct.section do |substruct|
+            fill_impl_section(substruct, key, value)
+          end
+        else
+          struct.section do |substruct|
+            if value.is_a? XCRes::String then
+              value = value.value
+            end
+            substruct.writeln '.%s = @"%s",' % [key, value]
+          end
+        end
+      end
+      struct.writeln '},'
     end
 
     def build_impl_contents m_file
@@ -153,36 +200,10 @@ EOS
       m_file.writeln
       m_file.writeln 'const struct %s %s = {' % [resources_constant_name, resources_constant_name]
       m_file.section do |struct|
-        enumerate_sections do |section_key, enumerate_keys, contents_count|
-          if contents_count > 0
-            struct.writeln '.%s = {' % section_key
-            struct.section do |section_struct|
-              enumerate_keys.call do |key, value|
-                section_struct.writeln '.%s = @"%s",' % [key, value]
-              end
-            end
-            struct.writeln '},'
-          end
+        for section_key, section_content in @sections.sort
+          fill_impl_section(struct, section_key, section_content)
         end
       end
       m_file.writeln '};'
     end
-
-    def enumerate_sections
-      # Iterate sections ordered by key
-      for section_key, section_content in @sections.sort
-        # Pass section key and block to yield the keys ordered
-        proc = Proc.new do |&block|
-          for key, value in section_content.sort
-            if value.is_a? Hash
-              block.call key, value[:value], value[:comment]
-            else
-              block.call key, value, nil
-            end
-          end
-        end
-        yield section_key, proc, section_content.length
-      end
-    end
-
 end

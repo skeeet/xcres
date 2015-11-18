@@ -1,0 +1,13 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "data" : [
+    {
+      "idiom" : "universal",
+      "filename" : "Yamaha-TG100-Whistle-C5.wav",
+      "universal-type-identifier" : "com.microsoft.waveform-audio"
+    }
+  ]
+}
