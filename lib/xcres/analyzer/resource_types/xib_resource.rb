@@ -6,15 +6,6 @@ module XCRes::ResourceTypes
   #
   class XIBResource < BaseResource
 
-    # Defined words that should be filtered out from the generated name
-    #
-    # @return [Array<String>]
-    #         prohibited words
-    #
-    def filter_words
-      return []
-    end
-
     # Detect if a given file is of the type that matches this resource type
     #
     # @param  [String] path
