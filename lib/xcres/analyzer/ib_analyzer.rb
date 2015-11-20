@@ -1,17 +1,16 @@
 require 'xcres/analyzer/analyzer'
-require 'xcres/analyzer/resource_types/xib_resource'
 require 'nokogiri'
 
 module XCRes
 
-  # A +XIBAnalyzer+ scans the project for identifiers inside xib files,
+  # A +IBAnalyzer+ scans the project for identifiers inside xib and storyboard files,
   # which should be included in the output file.
   #
-  class XIBAnalyzer < Analyzer
+  class IBAnalyzer < Analyzer
 
 
     def analyze
-      log 'Nib files in project: %s', xib_file_refs.map(&:path)
+      log 'IB files in project: %s', ib_file_refs.map(&:path)
 
       @sections = [build_section]
     end
@@ -21,14 +20,14 @@ module XCRes
     # @return [Section]
     #
     def build_section
-      selected_file_refs = xib_file_refs
+      selected_file_refs = ib_file_refs
 
       # Apply ignore list
       file_paths = filter_exclusions(selected_file_refs.map(&:path))
       filtered_file_refs = selected_file_refs.select { |file_ref| file_paths.include? file_ref.path }
       rel_file_paths = filtered_file_refs.map { |p| p.real_path.relative_path_from(Pathname.pwd) }
 
-      log 'Non-ignored .xib files: %s', rel_file_paths.map(&:to_s)
+      log 'Non-ignored IB files: %s', rel_file_paths.map(&:to_s)
 
       items = {}
       for path in rel_file_paths
@@ -40,22 +39,22 @@ module XCRes
       new_section('ReuseIdentifiers', items)
     end
 
-    # Discover all references to .xib files in project
+    # Discover all references to IB files in project
     #
     # @return [Array<PBXFileReference>]
     #
-    def xib_file_refs
-      @xib_file_refs ||= find_file_refs_by_extname '.xib'
+    def ib_file_refs
+      @ib_file_refs ||= (find_file_refs_by_extname('.xib') + find_file_refs_by_extname('.storyboard'))
     end
 
-    # Read a .xib file given as a path
+    # Read an IB file given as a path
     #
     # @param [Pathname] path
-    #        the path of the .xib file
+    #        the path of the IB file
     #
     # @return [Hash]
     #
-    def read_xib_file(path)
+    def read_ib_file(path)
       begin
         raise ArgumentError, "File '#{path}' doesn't exist" unless path.exist?
         raise ArgumentError, "File '#{path}' is not a file" unless path.file?
@@ -69,15 +68,16 @@ module XCRes
     # Read a file and collect all its keys
     #
     # @param  [Pathname] path
-    #         the path to the .xib file to read
+    #         the path to the IB file to read
     #
     # @return [Hash{String => Hash}]
     #
     def keys_by_file(path)
       begin
+
         # Load strings file contents
-        xib = read_xib_file(path)
-        doc = Nokogiri::XML(xib)
+        ib_file = read_ib_file(path)
+        doc = Nokogiri::XML(ib_file)
         attr_name = 'reuseIdentifier'
 
         keys = {}

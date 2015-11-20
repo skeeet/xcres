@@ -23,7 +23,9 @@
 Ⓥ Strings files after language selection: ["en.lproj/InfoPlist.strings", "en.lproj/Localizable.strings"]
 Ⓥ Non-ignored .strings files: ["Example/Example/en.lproj/Localizable.strings"]
 Ⓥ Found 4 keys in file Example/Example/en.lproj/Localizable.strings
-Ⓥ Nib files in project: ["MyView.xib"]
-Ⓥ Non-ignored .xib files: ["Example/Example/MyView.xib"]
+Ⓥ IB files in project: ["MyView.xib", "MyScene.storyboard", "LoginViewController.storyboard"]
+Ⓥ Non-ignored IB files: ["Example/Example/MyView.xib", "Example/Example/MyScene.storyboard", "Example/Example/LoginViewController.storyboard"]
 Ⓥ Found 1 reuse identifiers in file Example/Example/MyView.xib
+Ⓥ Found 1 reuse identifiers in file Example/Example/MyScene.storyboard
+Ⓥ Found 0 reuse identifiers in file Example/Example/LoginViewController.storyboard
 ✓ Successfully updated: ROOT/tmp/integration/build/R.h

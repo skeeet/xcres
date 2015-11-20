@@ -33,6 +33,9 @@ const struct R R = {
         .myView = @"MyView",
     },
     .ReuseIdentifiers = {
+        .MyScene = {
+            .mySceneStoryboard = @"MySceneStoryboard",
+        },
         .MyView = {
             .myViewXib = @"MyViewXib",
         },

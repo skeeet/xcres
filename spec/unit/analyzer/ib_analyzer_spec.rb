@@ -1,10 +1,9 @@
 require File.expand_path('../../spec_helper', __FILE__)
-# require 'xcres/analyzer/xib_analyzer'
 
-describe 'XCRes::XIBAnalyzer' do
+describe 'XCRes::IBAnalyzer' do
 
   def subject
-    XCRes::XIBAnalyzer
+    XCRes::IBAnalyzer
   end
 
   before do
@@ -36,22 +35,22 @@ describe 'XCRes::XIBAnalyzer' do
 
   describe "#build_section" do
     it 'should return an empty section if there are no xib files' do
-      @analyzer.stubs(:xib_file_refs).returns([])
+      @analyzer.stubs(:ib_file_refs).returns([])
       @analyzer.build_section.should.be.eql?(XCRes::Section.new 'ReuseIdentifiers', {})
     end
 
     it 'should return an empty section if there are xib files but no reuse identifiers found' do
-      @analyzer.stubs(:xib_file_refs).returns([])
+      @analyzer.stubs(:ib_file_refs).returns([])
       @analyzer.build_section.should.be.eql?(XCRes::Section.new 'ReuseIdentifiers', {})
     end
 
     it 'should return a new section if there are xib files with reuse identifiers found' do
-      xib_file_ref = stub('FileRef', {
+      ib_file_ref = stub('FileRef', {
         name:      'TestView',
         path:      'TestView.xib',
         real_path: Pathname(File.expand_path('./TestView.xib'))
       })
-      @analyzer.stubs(:xib_file_refs).returns([xib_file_ref])
+      @analyzer.stubs(:ib_file_refs).returns([ib_file_ref])
       @analyzer.stubs(:keys_by_file)
         .with(Pathname('TestView.xib'))
         .returns({
@@ -74,20 +73,36 @@ describe 'XCRes::XIBAnalyzer' do
       @analyzer.expects(:error).never
     end
 
-    describe "#xib_file_refs" do
-      it 'should return the xib files of the fixture project' do
-        xib_files = @analyzer.xib_file_refs
-        xib_files.count.should.be.eql?(1)
-        xib_files[0].path.should.be.eql?('TestView.xib')
+    describe "#ib_file_refs" do
+      it 'should return the ib files of the fixture project' do
+        ib_files = @analyzer.ib_file_refs
+        ib_files.count.should.be.eql?(4)
+        ib_files[0].path.should.be.eql?('TestView.xib')
+        ib_files[1].path.should.be.eql?('TestMyStoryboard.storyboard')
+        ib_files[2].path.should.be.eql?('TestMyScene.storyboard')
+        ib_files[3].path.should.be.eql?('OtherName.storyboard')
       end
     end
 
     describe "complete reuse identifiers section" do
       it 'should return a section build for all reuse identifiers in all xib files' do
         path = fixture_path + 'Example/Example/TestView.xib'
-        @analyzer.build_section.should.be.eql?(XCRes::Section.new('ReuseIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
-          'test_view_xib' => 'TestViewXib'
-        })}))
+        @analyzer.build_section.should.be.eql?(
+          XCRes::Section.new('ReuseIdentifiers', { 
+            'TestView' => XCRes::Section.new('TestView', {
+              'test_view_xib' => 'TestViewXib'
+            }),
+            'TestMyStoryboard' => XCRes::Section.new('TestMyStoryboard', {
+              'test_my_storyboard' => 'TestMyStoryboard'
+            }),
+            'TestMyScene' => XCRes::Section.new('TestMyScene', {
+              'test_my_scene' => 'TestMyScene'
+            }),
+            'OtherName' => XCRes::Section.new('OtherName', {
+              'other_name' => 'OtherName'
+            })
+          })
+        )
       end
     end
   end
@@ -96,12 +111,12 @@ describe 'XCRes::XIBAnalyzer' do
     it 'should read a valid file' do
       path = fixture_path + 'Example/Example/TestView.xib'
       file_contents = File.read(path)
-      @analyzer.read_xib_file(path).should == file_contents
+      @analyzer.read_ib_file(path).should == file_contents
     end
 
     it 'should raise an error for not existing file file' do
       proc do
-        @analyzer.read_xib_file(fixture_path + 'Example/Example/NotExisting.xib')
+        @analyzer.read_ib_file(fixture_path + 'Example/Example/NotExisting.xib')
       end.should.raise(ArgumentError).message.should.include "doesn't exist"
     end
   end

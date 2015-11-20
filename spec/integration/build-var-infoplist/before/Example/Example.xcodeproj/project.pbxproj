@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		06B697431BF0D28800DC9F6F /* aif.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 06B697421BF0D28800DC9F6F /* aif.aiff */; };
+		06FE46E41BFE34CE00D8C689 /* Stuff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06FE46E31BFE34CE00D8C689 /* Stuff.storyboard */; };
 		71239DA81912BFF70058657F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA71912BFF70058657F /* Foundation.framework */; };
 		71239DAA1912BFF70058657F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA91912BFF70058657F /* CoreGraphics.framework */; };
 		71239DAC1912BFF70058657F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DAB1912BFF70058657F /* UIKit.framework */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		06B697421BF0D28800DC9F6F /* aif.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = aif.aiff; sourceTree = "<group>"; };
+		06FE46E31BFE34CE00D8C689 /* Stuff.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Stuff.storyboard; sourceTree = "<group>"; };
 		711976AD19A392DE005748B4 /* nyanCat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nyanCat.png; sourceTree = "<group>"; };
 		71239DA41912BFF70058657F /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71239DA71912BFF70058657F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -126,6 +128,7 @@
 				715C078D198D029800316E8C /* Images */,
 				06B697411BF0D27A00DC9F6F /* Sounds */,
 				71239DAE1912BFF70058657F /* Supporting Files */,
+				06FE46E31BFE34CE00D8C689 /* Stuff.storyboard */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				06B697431BF0D28800DC9F6F /* aif.aiff in Resources */,
 				71239DB21912BFF80058657F /* InfoPlist.strings in Resources */,
 				71239DBA1912BFF80058657F /* Media.xcassets in Resources */,
+				06FE46E41BFE34CE00D8C689 /* Stuff.storyboard in Resources */,
 				71239DDC1912C07E0058657F /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -4,7 +4,7 @@ require 'xcres/builder/resources_builder'
 require 'xcres/analyzer/aggregate_analyzer'
 require 'xcres/analyzer/resources_aggregate_analyzer'
 require 'xcres/analyzer/strings_analyzer'
-require 'xcres/analyzer/xib_analyzer'
+require 'xcres/analyzer/ib_analyzer'
 
 # The +BuildCommand+ builds the resources index files.
 #
@@ -30,7 +30,7 @@ class XCRes::BuildCommand < XCRes::ProjectCommand
       analyzer.logger = logger
       analyzer.add_with_class(XCRes::ResourcesAggregateAnalyzer, shorten_keys: true)
       analyzer.add_with_class(XCRes::StringsAnalyzer, default_language: default_language)
-      analyzer.add_with_class(XCRes::XIBAnalyzer)
+      analyzer.add_with_class(XCRes::IBAnalyzer)
       sections = analyzer.analyze
 
       sections.each do |section|

@@ -27,8 +27,18 @@ const struct R R = {
             .launch = @"LaunchImage",
         },
     },
+    .ReuseIdentifiers = {
+        .Stuff = {
+            .row1 = @"row1",
+            .row2 = @"row2",
+            .row3 = @"row3",
+        },
+    },
     .Sounds = {
         .aif = @"aif.aiff",
+    },
+    .Storyboards = {
+        .stuff = @"Stuff",
     },
     .Strings = {
         .bar = @"bar",

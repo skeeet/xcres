@@ -23,8 +23,8 @@ Execute build first:
     Ⓥ Preferred languages: ["en"]
     Ⓥ Strings files after language selection: ["InfoPlist.strings"]
     Ⓥ Non-ignored .strings files: []
-    Ⓥ Nib files in project: []
-    Ⓥ Non-ignored .xib files: []
+    Ⓥ IB files in project: []
+    Ⓥ Non-ignored IB files: []
     ✓ Directory did not exist. Will be created.
     ✓ Successfully updated: ROOT/tmp/integration/install-no-supporting-files/Example/Resources/R.h
 ✓ Successfully integrated into Example/Example.xcodeproj

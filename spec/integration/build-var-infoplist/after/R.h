@@ -34,10 +34,24 @@ FOUNDATION_EXTERN const struct R {
             __unsafe_unretained NSString *launch;
         } Images;
     } MediaAssets;
+    struct ReuseIdentifiers {
+        struct ReuseIdentifiersStuff {
+            /// row1
+            __unsafe_unretained NSString *row1;
+            /// row2
+            __unsafe_unretained NSString *row2;
+            /// row3
+            __unsafe_unretained NSString *row3;
+        } Stuff;
+    } ReuseIdentifiers;
     struct Sounds {
         /// aif.aiff
         __unsafe_unretained NSString *aif;
     } Sounds;
+    struct Storyboards {
+        /// Stuff
+        __unsafe_unretained NSString *stuff;
+    } Storyboards;
     struct Strings {
         /// Bar String
         __unsafe_unretained NSString *bar;

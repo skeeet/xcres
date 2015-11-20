@@ -43,6 +43,10 @@ FOUNDATION_EXTERN const struct R {
         __unsafe_unretained NSString *myView;
     } Nibs;
     struct ReuseIdentifiers {
+        struct ReuseIdentifiersMyScene {
+            /// MySceneStoryboard
+            __unsafe_unretained NSString *mySceneStoryboard;
+        } MyScene;
         struct ReuseIdentifiersMyView {
             /// MyViewXib
             __unsafe_unretained NSString *myViewXib;

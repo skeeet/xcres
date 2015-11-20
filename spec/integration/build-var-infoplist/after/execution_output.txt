@@ -15,7 +15,7 @@
 Ⓥ Found #1 images in the project.
 Ⓥ Found #1 sounds in the project.
 Ⓥ Found #0 nibs in the project.
-Ⓥ Found #0 storyboards in the project.
+Ⓥ Found #1 storyboards in the project.
 Ⓥ Strings files in project: ["en.lproj/InfoPlist.strings", "en.lproj/Localizable.strings", "de.lproj/Localizable.strings"]
 Ⓥ Native development languages: ["en"]
 Ⓥ Used languages for .strings files: ["en", "de"]
@@ -23,6 +23,7 @@
 Ⓥ Strings files after language selection: ["en.lproj/InfoPlist.strings", "en.lproj/Localizable.strings"]
 Ⓥ Non-ignored .strings files: ["Example/Example/en.lproj/Localizable.strings"]
 Ⓥ Found 4 keys in file Example/Example/en.lproj/Localizable.strings
-Ⓥ Nib files in project: []
-Ⓥ Non-ignored .xib files: []
+Ⓥ IB files in project: ["Stuff.storyboard"]
+Ⓥ Non-ignored IB files: ["Example/Example/Stuff.storyboard"]
+Ⓥ Found 3 reuse identifiers in file Example/Example/Stuff.storyboard
 ✓ Successfully updated: ROOT/tmp/integration/build-var-infoplist/R.h

@@ -12,7 +12,7 @@ describe 'XCRes::ResourceTypes::StoryboardResource' do
 
   describe '#filter_words' do
     it 'should return a correct #filter_words for this type' do
-      @type.filter_words.should.be.eql?(['view_controller', 'scene'])
+      @type.filter_words.should.be.eql?(['view_controller', 'scene', 'storyboard'])
     end
   end
 

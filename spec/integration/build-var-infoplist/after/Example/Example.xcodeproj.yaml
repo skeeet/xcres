@@ -19,6 +19,7 @@ File References:
     - Localizable.strings:
       - en
       - de
+  - Stuff.storyboard
 - Frameworks:
   - Foundation.framework
   - CoreGraphics.framework
@@ -46,6 +47,7 @@ Targets:
       - aif.aiff
       - InfoPlist.strings
       - Media.xcassets
+      - Stuff.storyboard
       - Localizable.strings
     Build Configurations:
     - Debug:

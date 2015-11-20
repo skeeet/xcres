@@ -12,7 +12,7 @@ module XCRes::ResourceTypes
     #         prohibited words
     #
     def filter_words
-      return ['view_controller', 'scene']
+      return ['view_controller', 'scene', 'storyboard']
     end
 
     # Detect if a given file is of the type that matches this resource type
