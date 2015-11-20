@@ -10,10 +10,9 @@
 as struct constants. So you will never have to reference a resource, without
 knowing already at compile time if it exists or not.
 
-It includes **loose images**, **loose sounds**, **.bundles**, **asset catalogs** (.xcasset)
-and even **.strings** in the index.
+It includes **images**, **sounds**, **.xibs**, **.storyboards**, **.bundles**, **asset catalogs** (.xcasset), and even **.strings** in the index.
 
-It gives you **code autocompletion** for resources and localized string keys,
+It gives you **code autocompletion** for resources, localized string keys and interface builder reuse identifiers,
 without the need of an Xcode plugin.
 
 Especially if your app is a bit more complex, this will greatly improve your
@@ -21,7 +20,7 @@ workflow. It ensures a better quality and gives you more safety.
 You will see directly when a resource is missing, when you renamed it,
 or you moved it around.
 
-Furthermore it won't even bother you for trivial name changes like change
+Furthermore, it won't even bother you for trivial name changes like change
 capitalization or converting name scheme from *train-case* or *snake_case* to
 *camelCase* and vice versa.
 
@@ -56,6 +55,20 @@ FOUNDATION_EXTERN const struct R {
             __unsafe_unretained NSString *customDataSet;
         } Data;
     } MediaAssets;
+    struct Nibs {
+        /// MyView
+        __unsafe_unretained NSString *myView;
+    } Nibs;
+    struct ReuseIdenrifiers {
+        struct ReuseIdentifiersMyView {
+            /// DefaultCell
+            __unsafe_unretained NSString *defaultCell;
+        } MyView;
+    } ReuseIdentifiers;
+    struct Storyboards {
+        /// Launch
+        __unsafe_unretained NSString *launch;
+    } Storyboards; 
     struct Strings {
         /// Password wrong!
         __unsafe_unretained NSString *errorTitleWrongPassword;
