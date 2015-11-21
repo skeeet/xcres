@@ -28,40 +28,66 @@ describe 'XCRes::IBAnalyzer' do
   describe "#analyze" do
     it 'should return the built sections' do
       section = mock()
-      @analyzer.expects(:build_section).returns(section)
+      @analyzer.expects(:build_sections).returns([section])
       @analyzer.analyze.should.be.eql?([section])
     end
   end
 
-  describe "#build_section" do
-    it 'should return an empty section if there are no xib files' do
+  describe "#build_sections" do
+    it 'should return no sections if there are no xib files' do
       @analyzer.stubs(:ib_file_refs).returns([])
-      @analyzer.build_section.should.be.eql?(XCRes::Section.new 'ReuseIdentifiers', {})
+      @analyzer.build_sections.should.be.eql?([])
     end
 
-    it 'should return an empty section if there are xib files but no reuse identifiers found' do
+    it 'should return no sections if there are xib files but no reuse identifiers found' do
       @analyzer.stubs(:ib_file_refs).returns([])
-      @analyzer.build_section.should.be.eql?(XCRes::Section.new 'ReuseIdentifiers', {})
+      @analyzer.build_sections.should.be.eql?([])
     end
 
-    it 'should return a new section if there are xib files with reuse identifiers found' do
+    it 'should return reuse identifiers only if it is a xib' do
       ib_file_ref = stub('FileRef', {
         name:      'TestView',
         path:      'TestView.xib',
         real_path: Pathname(File.expand_path('./TestView.xib'))
       })
       @analyzer.stubs(:ib_file_refs).returns([ib_file_ref])
-      @analyzer.stubs(:keys_by_file)
-        .with(Pathname('TestView.xib'))
+      @analyzer.stubs(:read_ib_file).returns('')
+      @analyzer.stubs(:find_elements)
         .returns({
           'id1' => 'Id1',
           'id2' => 'Id2' 
         })
-      @analyzer.build_section.should.be.eql?(XCRes::Section.new('ReuseIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
+      @analyzer.build_sections.should.be.eql?([XCRes::Section.new('ReuseIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
         'id1' => 'Id1',
         'id2' => 'Id2' 
-      })}))
+      })})])
     end
+
+    it 'should return reuse identifiers, storyboard and segue ids if it is a storyboard' do
+      ib_file_ref = stub('FileRef', {
+        name:      'TestView',
+        path:      'TestView.storyboard',
+        real_path: Pathname(File.expand_path('./TestView.storyboard'))
+      })
+      @analyzer.stubs(:ib_file_refs).returns([ib_file_ref])
+      @analyzer.stubs(:read_ib_file).returns('')
+      @analyzer.stubs(:find_elements)
+        .returns({
+          'id1' => 'Id1'
+        })
+      @analyzer.build_sections.should.be.eql?([
+        XCRes::Section.new('ReuseIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
+        'id1' => 'Id1'
+        })}),
+        XCRes::Section.new('SegueIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
+        'id1' => 'Id1'
+        })}),
+        XCRes::Section.new('StoryboardIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
+        'id1' => 'Id1'
+        })})
+      ])
+    end
+
   end
 
   describe "with fixture project" do
@@ -84,10 +110,10 @@ describe 'XCRes::IBAnalyzer' do
       end
     end
 
-    describe "complete reuse identifiers section" do
+    describe "complete identifiers sections" do
       it 'should return a section build for all reuse identifiers in all xib files' do
         path = fixture_path + 'Example/Example/TestView.xib'
-        @analyzer.build_section.should.be.eql?(
+        @analyzer.build_sections.should.be.eql?([
           XCRes::Section.new('ReuseIdentifiers', { 
             'TestView' => XCRes::Section.new('TestView', {
               'test_view_xib' => 'TestViewXib'
@@ -102,12 +128,12 @@ describe 'XCRes::IBAnalyzer' do
               'other_name' => 'OtherName'
             })
           })
-        )
+        ])
       end
     end
   end
 
-  describe "#read_xib_file" do
+  describe "#read_ib_file" do
     it 'should read a valid file' do
       path = fixture_path + 'Example/Example/TestView.xib'
       file_contents = File.read(path)
@@ -121,10 +147,11 @@ describe 'XCRes::IBAnalyzer' do
     end
   end
 
-  describe "#keys_by_file" do
-    it 'should return the reuse identifier hash for given xib' do
+  describe "#find_elements" do
+    it 'should return the reuse identifier hash for given xml' do
       path = fixture_path + 'Example/Example/TestView.xib'
-      @analyzer.keys_by_file(path).should == { 'test_view_xib' => 'TestViewXib' }
+      xml = Nokogiri::XML(path)
+      @analyzer.find_elements(xml, 'tableViewCell', 'reuseIdentifier').should == { 'test_view_xib' => 'TestViewXib' }
     end
   end
 

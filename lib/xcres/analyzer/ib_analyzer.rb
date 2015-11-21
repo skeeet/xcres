@@ -12,14 +12,14 @@ module XCRes
     def analyze
       log 'IB files in project: %s', ib_file_refs.map(&:path)
 
-      @sections = [build_section]
+      @sections = build_sections
     end
 
     # Build the section
     #
     # @return [Section]
     #
-    def build_section
+    def build_sections
       selected_file_refs = ib_file_refs
 
       # Apply ignore list
@@ -29,14 +29,48 @@ module XCRes
 
       log 'Non-ignored IB files: %s', rel_file_paths.map(&:to_s)
 
-      items = {}
+      cell_ids = {}
+      segue_ids = {}
+      storyboard_ids = {}
       for path in rel_file_paths
         filename = path.relative_path_from(path.parent)
-        key = filename.to_s.sub /#{File.extname(path)}$/, ''
-        items[key] = XCRes::Section.new(key, keys_by_file(path))
+        extension = File.extname(path)
+        key = filename.to_s.sub /#{extension}$/, ''
+
+        begin
+
+          # Load IB file contents
+          ib_file = read_ib_file(path)
+          doc = Nokogiri::XML(ib_file)
+
+          # Find cell reuse identifiers
+          c_ids = find_elements(doc, '*', 'reuseIdentifier')
+          log 'Found %s reuse identifiers in file %s', c_ids.count, path
+          cell_ids[key] = XCRes::Section.new(key, c_ids) if c_ids.count > 0
+
+          if extension == '.storyboard' then
+
+            # Find segue identifiers
+            s_ids = find_elements(doc, 'segue', 'identifier')
+            log 'Found %s segue identifiers in file %s', s_ids.count, path
+            segue_ids[key] = XCRes::Section.new(key, s_ids) if s_ids.count > 0
+
+            # Find storyboard identifiers
+            b_ids = find_elements(doc, 'viewController', 'storyboardIdentifier')
+            log 'Found %s storyboard identifiers in file %s', b_ids.count, path
+            storyboard_ids[key] = XCRes::Section.new(key, b_ids) if b_ids.count > 0
+          end
+
+        rescue ArgumentError => error
+          raise ArgumentError, 'Error while reading %s: %s' % [path, error]
+        end
       end
 
-      new_section('ReuseIdentifiers', items)
+      res = []
+      res += [new_section('ReuseIdentifiers', cell_ids)] if cell_ids.count > 0
+      res += [new_section('SegueIdentifiers', segue_ids)] if segue_ids.count > 0
+      res += [new_section('StoryboardIdentifiers', storyboard_ids)] if storyboard_ids.count > 0
+      res
     end
 
     # Discover all references to IB files in project
@@ -65,36 +99,28 @@ module XCRes
       end
     end
 
-    # Read a file and collect all its keys
+    # Searches for a specific tag with specific attribute
+    # name inside the given XML contents
     #
-    # @param  [Pathname] path
-    #         the path to the IB file to read
+    # @param  [String] xml
+    #         XML contents of the IB file
+    #
+    # @param  [String] tag_name
+    #         Name of the XML tag
+    #
+    # @param  [String] attr_name
+    #         Name of the tag's attribute
     #
     # @return [Hash{String => Hash}]
     #
-    def keys_by_file(path)
-      begin
-
-        # Load strings file contents
-        ib_file = read_ib_file(path)
-        doc = Nokogiri::XML(ib_file)
-        attr_name = 'reuseIdentifier'
-
-        keys = {}
-
-        doc.xpath("//*[@#{attr_name}]").each do |n|
-          identifier = n.attribute(attr_name).to_s
-          id_key = key_from_path(identifier)
-          keys[id_key] = identifier
-        end
-
-        log 'Found %s reuse identifiers in file %s', keys.count, path
-
-        keys
-      rescue ArgumentError => error
-        raise ArgumentError, 'Error while reading %s: %s' % [path, error]
+    def find_elements(xml, tag_name, attr_name)
+      keys = {}
+      xml.xpath("//#{tag_name}[@#{attr_name}]").each do |n|
+        identifier = n.attribute(attr_name).to_s
+        id_key = key_from_path(identifier)
+        keys[id_key] = identifier
       end
+      keys
     end
-
   end
 end

@@ -25,5 +25,7 @@
 Ⓥ Found 4 keys in file Example/Example/en.lproj/Localizable.strings
 Ⓥ IB files in project: ["Stuff.storyboard"]
 Ⓥ Non-ignored IB files: ["Example/Example/Stuff.storyboard"]
-Ⓥ Found 3 reuse identifiers in file Example/Example/Stuff.storyboard
+Ⓥ Found 6 reuse identifiers in file Example/Example/Stuff.storyboard
+Ⓥ Found 1 segue identifiers in file Example/Example/Stuff.storyboard
+Ⓥ Found 0 storyboard identifiers in file Example/Example/Stuff.storyboard
 ✓ Successfully updated: ROOT/tmp/integration/build-var-infoplist/R.h

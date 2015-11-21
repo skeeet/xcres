@@ -36,14 +36,26 @@ FOUNDATION_EXTERN const struct R {
     } MediaAssets;
     struct ReuseIdentifiers {
         struct ReuseIdentifiersStuff {
+            /// collection1
+            __unsafe_unretained NSString *collection1;
+            /// collection2
+            __unsafe_unretained NSString *collection2;
             /// row1
             __unsafe_unretained NSString *row1;
             /// row2
             __unsafe_unretained NSString *row2;
             /// row3
             __unsafe_unretained NSString *row3;
+            /// table2
+            __unsafe_unretained NSString *table2;
         } Stuff;
     } ReuseIdentifiers;
+    struct SegueIdentifiers {
+        struct SegueIdentifiersStuff {
+            /// testSegue
+            __unsafe_unretained NSString *testSegue;
+        } Stuff;
+    } SegueIdentifiers;
     struct Sounds {
         /// aif.aiff
         __unsafe_unretained NSString *aif;

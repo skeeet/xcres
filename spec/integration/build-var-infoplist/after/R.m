@@ -29,9 +29,17 @@ const struct R R = {
     },
     .ReuseIdentifiers = {
         .Stuff = {
+            .collection1 = @"collection1",
+            .collection2 = @"collection2",
             .row1 = @"row1",
             .row2 = @"row2",
             .row3 = @"row3",
+            .table2 = @"table2",
+        },
+    },
+    .SegueIdentifiers = {
+        .Stuff = {
+            .testSegue = @"testSegue",
         },
     },
     .Sounds = {
