@@ -51,7 +51,7 @@
         <!--Collection View Controller-->
         <scene sceneID="IYM-tD-okh">
             <objects>
-                <collectionViewController id="uf5-ax-T0u" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="col" id="uf5-ax-T0u" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="F9R-Dm-VBz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,7 +88,7 @@
         <!--View Controller-->
         <scene sceneID="PFK-LZ-9FW">
             <objects>
-                <viewController id="eb5-ev-QLo" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="view" id="eb5-ev-QLo" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Po7-5V-7tu"/>
                         <viewControllerLayoutGuide type="bottom" id="TWi-Mm-967"/>
@@ -149,7 +149,7 @@
         <!--Table View Controller-->
         <scene sceneID="OpV-2t-rTF">
             <objects>
-                <tableViewController id="949-Xe-tTh" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="table" id="949-Xe-tTh" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2qj-EL-csl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -176,6 +176,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9AN-3s-aVL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="760" y="-4"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="0BW-gy-TRx">
+            <objects>
+                <splitViewController storyboardIdentifier="split" id="kme-aI-h9v" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tjw-oG-G5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-298" y="1622"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="AKT-Y9-jB8">
+            <objects>
+                <tabBarController storyboardIdentifier="tab" id="CxA-zP-lmX" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="4pg-HR-gK6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hDZ-qL-Bhj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="753" y="1420"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8lN-cc-L3o">
+            <objects>
+                <navigationController storyboardIdentifier="nav" id="Lst-M9-I8c" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eCY-pE-9Mh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lsa-4J-ljg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="47" y="440"/>
         </scene>
     </scenes>
 </document>

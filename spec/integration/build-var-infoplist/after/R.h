@@ -60,6 +60,22 @@ FOUNDATION_EXTERN const struct R {
         /// aif.aiff
         __unsafe_unretained NSString *aif;
     } Sounds;
+    struct StoryboardIdentifiers {
+        struct StoryboardIdentifiersStuff {
+            /// col
+            __unsafe_unretained NSString *col;
+            /// nav
+            __unsafe_unretained NSString *nav;
+            /// split
+            __unsafe_unretained NSString *split;
+            /// tab
+            __unsafe_unretained NSString *tab;
+            /// table
+            __unsafe_unretained NSString *table;
+            /// view
+            __unsafe_unretained NSString *view;
+        } Stuff;
+    } StoryboardIdentifiers;
     struct Storyboards {
         /// Stuff
         __unsafe_unretained NSString *stuff;

@@ -56,7 +56,7 @@ module XCRes
             segue_ids[key] = XCRes::Section.new(key, s_ids) if s_ids.count > 0
 
             # Find storyboard identifiers
-            b_ids = find_elements(doc, 'viewController', 'storyboardIdentifier')
+            b_ids = find_elements(doc, '*', 'storyboardIdentifier')
             log 'Found %s storyboard identifiers in file %s', b_ids.count, path
             storyboard_ids[key] = XCRes::Section.new(key, b_ids) if b_ids.count > 0
           end

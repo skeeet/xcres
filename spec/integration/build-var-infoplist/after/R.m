@@ -45,6 +45,16 @@ const struct R R = {
     .Sounds = {
         .aif = @"aif.aiff",
     },
+    .StoryboardIdentifiers = {
+        .Stuff = {
+            .col = @"col",
+            .nav = @"nav",
+            .split = @"split",
+            .tab = @"tab",
+            .table = @"table",
+            .view = @"view",
+        },
+    },
     .Storyboards = {
         .stuff = @"Stuff",
     },

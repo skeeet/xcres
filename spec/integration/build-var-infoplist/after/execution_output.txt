@@ -27,5 +27,5 @@
 Ⓥ Non-ignored IB files: ["Example/Example/Stuff.storyboard"]
 Ⓥ Found 6 reuse identifiers in file Example/Example/Stuff.storyboard
 Ⓥ Found 1 segue identifiers in file Example/Example/Stuff.storyboard
-Ⓥ Found 0 storyboard identifiers in file Example/Example/Stuff.storyboard
+Ⓥ Found 6 storyboard identifiers in file Example/Example/Stuff.storyboard
 ✓ Successfully updated: ROOT/tmp/integration/build-var-infoplist/R.h
