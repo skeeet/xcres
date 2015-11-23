@@ -28,5 +28,5 @@
 Ⓥ Found 6 reuse identifiers in file Example/Example/Stuff.storyboard
 Ⓥ Found 1 segue identifiers in file Example/Example/Stuff.storyboard
 Ⓥ Found 7 storyboard identifiers in file Example/Example/Stuff.storyboard
-Ⓥ Found 1 restoration identifiers in file Example/Example/Stuff.storyboard
+Ⓥ Found 2 restoration identifiers in file Example/Example/Stuff.storyboard
 ✓ Successfully updated: ROOT/tmp/integration/build-var-infoplist/R.h

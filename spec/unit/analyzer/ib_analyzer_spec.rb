@@ -84,6 +84,9 @@ describe 'XCRes::IBAnalyzer' do
         })}),
         XCRes::Section.new('StoryboardIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
         'id1' => 'Id1'
+        })}),
+        XCRes::Section.new('RestorationIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
+        'id1' => 'Id1'
         })})
       ])
     end

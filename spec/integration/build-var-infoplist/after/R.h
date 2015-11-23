@@ -38,6 +38,8 @@ FOUNDATION_EXTERN const struct R {
         struct RestorationIdentifiersStuff {
             /// restoreTable
             __unsafe_unretained NSString *restoreTable;
+            /// table2
+            __unsafe_unretained NSString *table2;
         } Stuff;
     } RestorationIdentifiers;
     struct ReuseIdentifiers {

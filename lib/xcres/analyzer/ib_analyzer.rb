@@ -63,6 +63,14 @@ module XCRes
 
             # Find restoration identifiers
             r_ids = find_elements(doc, '*', 'restorationIdentifier')
+
+            # Find restoration identifiers that are equal to storyboard identifiers
+            doc.xpath("//*[@useStoryboardIdentifierAsRestorationIdentifier='YES']").each do |n|
+              identifier = n.attribute('storyboardIdentifier').to_s
+              id_key = key_from_path(identifier)
+              r_ids[id_key] = identifier
+            end
+
             log 'Found %s restoration identifiers in file %s', r_ids.count, path
             restoration_ids[key] = XCRes::Section.new(key, r_ids) if r_ids.count > 0
           end

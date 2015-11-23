@@ -30,6 +30,7 @@ const struct R R = {
     .RestorationIdentifiers = {
         .Stuff = {
             .restoreTable = @"restoreTable",
+            .table2 = @"table2",
         },
     },
     .ReuseIdentifiers = {
