@@ -27,6 +27,11 @@ const struct R R = {
             .launch = @"LaunchImage",
         },
     },
+    .RestorationIdentifiers = {
+        .Stuff = {
+            .restoreTable = @"restoreTable",
+        },
+    },
     .ReuseIdentifiers = {
         .Stuff = {
             .collection1 = @"collection1",
@@ -52,6 +57,7 @@ const struct R R = {
             .split = @"split",
             .tab = @"tab",
             .table = @"table",
+            .table2 = @"table2",
             .view = @"view",
         },
     },

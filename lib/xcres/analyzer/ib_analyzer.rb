@@ -32,6 +32,7 @@ module XCRes
       cell_ids = {}
       segue_ids = {}
       storyboard_ids = {}
+      restoration_ids = {}
       for path in rel_file_paths
         filename = path.relative_path_from(path.parent)
         extension = File.extname(path)
@@ -59,6 +60,11 @@ module XCRes
             b_ids = find_elements(doc, '*', 'storyboardIdentifier')
             log 'Found %s storyboard identifiers in file %s', b_ids.count, path
             storyboard_ids[key] = XCRes::Section.new(key, b_ids) if b_ids.count > 0
+
+            # Find restoration identifiers
+            r_ids = find_elements(doc, '*', 'restorationIdentifier')
+            log 'Found %s restoration identifiers in file %s', r_ids.count, path
+            restoration_ids[key] = XCRes::Section.new(key, r_ids) if r_ids.count > 0
           end
 
         rescue ArgumentError => error
@@ -70,6 +76,7 @@ module XCRes
       res += [new_section('ReuseIdentifiers', cell_ids)] if cell_ids.count > 0
       res += [new_section('SegueIdentifiers', segue_ids)] if segue_ids.count > 0
       res += [new_section('StoryboardIdentifiers', storyboard_ids)] if storyboard_ids.count > 0
+      res += [new_section('RestorationIdentifiers', restoration_ids)] if restoration_ids.count > 0
       res
     end
 

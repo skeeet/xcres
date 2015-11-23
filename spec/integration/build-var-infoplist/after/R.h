@@ -34,6 +34,12 @@ FOUNDATION_EXTERN const struct R {
             __unsafe_unretained NSString *launch;
         } Images;
     } MediaAssets;
+    struct RestorationIdentifiers {
+        struct RestorationIdentifiersStuff {
+            /// restoreTable
+            __unsafe_unretained NSString *restoreTable;
+        } Stuff;
+    } RestorationIdentifiers;
     struct ReuseIdentifiers {
         struct ReuseIdentifiersStuff {
             /// collection1
@@ -72,6 +78,8 @@ FOUNDATION_EXTERN const struct R {
             __unsafe_unretained NSString *tab;
             /// table
             __unsafe_unretained NSString *table;
+            /// table2
+            __unsafe_unretained NSString *table2;
             /// view
             __unsafe_unretained NSString *view;
         } Stuff;

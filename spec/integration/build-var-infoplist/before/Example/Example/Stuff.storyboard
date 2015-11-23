@@ -7,7 +7,7 @@
         <!--TestStoryId-->
         <scene sceneID="vB9-AQ-S5V">
             <objects>
-                <tableViewController title="TestStoryId" id="Url-ZX-mvF" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="table2" title="TestStoryId" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Url-ZX-mvF" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ehd-jJ-06K">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,7 +149,7 @@
         <!--Table View Controller-->
         <scene sceneID="OpV-2t-rTF">
             <objects>
-                <tableViewController storyboardIdentifier="table" id="949-Xe-tTh" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="restoreTable" storyboardIdentifier="table" id="949-Xe-tTh" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2qj-EL-csl">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
