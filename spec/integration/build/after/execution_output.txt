@@ -26,6 +26,7 @@
 Ⓥ IB files in project: ["MyView.xib", "MyScene.storyboard", "LoginViewController.storyboard"]
 Ⓥ Non-ignored IB files: ["Example/Example/MyView.xib", "Example/Example/MyScene.storyboard", "Example/Example/LoginViewController.storyboard"]
 Ⓥ Found 1 reuse identifiers in file Example/Example/MyView.xib
+Ⓥ Found 2 restoration identifiers in file Example/Example/MyView.xib
 Ⓥ Found 1 reuse identifiers in file Example/Example/MyScene.storyboard
 Ⓥ Found 0 segue identifiers in file Example/Example/MyScene.storyboard
 Ⓥ Found 0 storyboard identifiers in file Example/Example/MyScene.storyboard

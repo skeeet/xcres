@@ -57,10 +57,16 @@ describe 'XCRes::IBAnalyzer' do
           'id1' => 'Id1',
           'id2' => 'Id2' 
         })
-      @analyzer.build_sections.should.be.eql?([XCRes::Section.new('ReuseIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
-        'id1' => 'Id1',
-        'id2' => 'Id2' 
-      })})])
+      @analyzer.build_sections.should.be.eql?([
+        XCRes::Section.new('ReuseIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
+          'id1' => 'Id1',
+          'id2' => 'Id2' 
+        })}),
+        XCRes::Section.new('RestorationIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
+          'id1' => 'Id1',
+          'id2' => 'Id2' 
+        })})
+      ])
     end
 
     it 'should return reuse identifiers, storyboard and segue ids if it is a storyboard' do

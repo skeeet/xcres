@@ -42,6 +42,14 @@ FOUNDATION_EXTERN const struct R {
         /// MyView
         __unsafe_unretained NSString *myView;
     } Nibs;
+    struct RestorationIdentifiers {
+        struct RestorationIdentifiersMyView {
+            /// restoration
+            __unsafe_unretained NSString *restoration;
+            /// view
+            __unsafe_unretained NSString *view;
+        } MyView;
+    } RestorationIdentifiers;
     struct ReuseIdentifiers {
         struct ReuseIdentifiersMyScene {
             /// MySceneStoryboard

@@ -32,6 +32,12 @@ const struct R R = {
     .Nibs = {
         .myView = @"MyView",
     },
+    .RestorationIdentifiers = {
+        .MyView = {
+            .restoration = @"restoration",
+            .view = @"view",
+        },
+    },
     .ReuseIdentifiers = {
         .MyScene = {
             .mySceneStoryboard = @"MySceneStoryboard",

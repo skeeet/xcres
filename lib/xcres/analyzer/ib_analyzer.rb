@@ -49,6 +49,9 @@ module XCRes
           log 'Found %s reuse identifiers in file %s', c_ids.count, path
           cell_ids[key] = XCRes::Section.new(key, c_ids) if c_ids.count > 0
 
+          # Find restoration identifiers
+          r_ids = find_elements(doc, '*', 'restorationIdentifier')
+
           if extension == '.storyboard' then
 
             # Find segue identifiers
@@ -61,8 +64,6 @@ module XCRes
             log 'Found %s storyboard identifiers in file %s', b_ids.count, path
             storyboard_ids[key] = XCRes::Section.new(key, b_ids) if b_ids.count > 0
 
-            # Find restoration identifiers
-            r_ids = find_elements(doc, '*', 'restorationIdentifier')
 
             # Find restoration identifiers that are equal to storyboard identifiers
             doc.xpath("//*[@useStoryboardIdentifierAsRestorationIdentifier='YES']").each do |n|
@@ -71,10 +72,11 @@ module XCRes
               r_ids[id_key] = identifier
             end
 
-            log 'Found %s restoration identifiers in file %s', r_ids.count, path
-            restoration_ids[key] = XCRes::Section.new(key, r_ids) if r_ids.count > 0
           end
 
+          log 'Found %s restoration identifiers in file %s', r_ids.count, path
+          restoration_ids[key] = XCRes::Section.new(key, r_ids) if r_ids.count > 0
+            
         rescue ArgumentError => error
           raise ArgumentError, 'Error while reading %s: %s' % [path, error]
         end
