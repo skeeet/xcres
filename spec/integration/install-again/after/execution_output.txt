@@ -24,6 +24,8 @@ Execute build first:
     Ⓥ Non-ignored .strings files: []
     Ⓥ IB files in project: []
     Ⓥ Non-ignored IB files: []
+    Ⓥ Font files in project: []
+    Ⓥ Non-ignored font files: []
     ✓ Existing file is up-to-date. Don't touch.
     ✓ Existing file is up-to-date. Don't touch.
     ✓ Successfully updated: ROOT/tmp/integration/install-again/Example/Example/Resources/R.h

@@ -12,6 +12,9 @@ File References:
     - mp3.mp3
     - aif.aiff
   - Supporting Files:
+    - ProximaNova-BoldIt.otf
+    - Prida02Calt.otf
+    - YourSignature.ttf
     - Example-Info.plist
     - InfoPlist.strings:
       - en
@@ -46,10 +49,13 @@ Targets:
     - ResourcesBuildPhase:
       - LoginViewController.storyboard
       - Icons.bundle
+      - YourSignature.ttf
       - doge.jpeg
       - MyView.xib
       - InfoPlist.strings
       - mp3.mp3
+      - Prida02Calt.otf
+      - ProximaNova-BoldIt.otf
       - MyScene.storyboard
       - Media.xcassets
       - Localizable.strings

@@ -24,6 +24,8 @@ Execute build first:
     Ⓥ Non-ignored .strings files: []
     Ⓥ IB files in project: []
     Ⓥ Non-ignored IB files: []
+    Ⓥ Font files in project: []
+    Ⓥ Non-ignored font files: []
     ✓ Directory did not exist. Will be created.
     ✓ Successfully updated: ROOT/tmp/integration/install-moved-supporting-files/Example/Supporting_Files/Resources/R.h
 ✓ Successfully integrated into Example/Example.xcodeproj

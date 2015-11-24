@@ -17,7 +17,7 @@ module XCRes
 
     # Build the section
     #
-    # @return [Section]
+    # @return [Array<Section>]
     #
     def build_sections
       selected_file_refs = ib_file_refs

@@ -8,6 +8,14 @@
 #import <Foundation/Foundation.h>
 
 FOUNDATION_EXTERN const struct R {
+    struct Fonts {
+        /// Prida02Calt
+        __unsafe_unretained NSString *prida02Calt;
+        /// ProximaNova-BoldIt
+        __unsafe_unretained NSString *proximaNovaBoldIt;
+        /// YourSignature
+        __unsafe_unretained NSString *yourSignature;
+    } Fonts;
     struct Icons {
         struct IconsImages {
             /// tab_bar/tabbar_list.png

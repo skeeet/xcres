@@ -35,4 +35,6 @@
 Ⓥ Found 0 segue identifiers in file Example/Example/LoginViewController.storyboard
 Ⓥ Found 0 storyboard identifiers in file Example/Example/LoginViewController.storyboard
 Ⓥ Found 0 restoration identifiers in file Example/Example/LoginViewController.storyboard
+Ⓥ Font files in project: ["ProximaNova-BoldIt.otf", "Prida02Calt.otf", "YourSignature.ttf"]
+Ⓥ Non-ignored font files: ["Example/Example/ProximaNova-BoldIt.otf", "Example/Example/Prida02Calt.otf", "Example/Example/YourSignature.ttf"]
 ✓ Successfully updated: ROOT/tmp/integration/build/R.h

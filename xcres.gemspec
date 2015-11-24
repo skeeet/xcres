@@ -39,4 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'activesupport', '>= 3.2.15', '< 4'
   spec.add_runtime_dependency 'xcodeproj', '~> 0.18'
   spec.add_runtime_dependency 'nokogiri', '~> 1.6'
+  spec.add_runtime_dependency 'ttfunk', '~> 1.4'
 end

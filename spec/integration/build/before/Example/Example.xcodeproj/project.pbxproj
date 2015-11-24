@@ -11,6 +11,9 @@
 		0613AB611BF635F300161357 /* MyScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0613AB601BF635F300161357 /* MyScene.storyboard */; };
 		0613AB631BF6367600161357 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0613AB621BF6367600161357 /* LoginViewController.storyboard */; };
 		06B6973F1BF0CD0900DC9F6F /* mp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 06B6973E1BF0CD0900DC9F6F /* mp3.mp3 */; };
+		06D5F3401C04C66D00064900 /* YourSignature.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06D5F33F1C04C66D00064900 /* YourSignature.ttf */; };
+		06D5F3421C04C67F00064900 /* Prida02Calt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 06D5F3411C04C67F00064900 /* Prida02Calt.otf */; };
+		06D5F3441C04D1D200064900 /* ProximaNova-BoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 06D5F3431C04D1D200064900 /* ProximaNova-BoldIt.otf */; };
 		71239DA81912BFF70058657F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA71912BFF70058657F /* Foundation.framework */; };
 		71239DAA1912BFF70058657F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DA91912BFF70058657F /* CoreGraphics.framework */; };
 		71239DAC1912BFF70058657F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71239DAB1912BFF70058657F /* UIKit.framework */; };
@@ -29,6 +32,9 @@
 		0613AB621BF6367600161357 /* LoginViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
 		06B6973E1BF0CD0900DC9F6F /* mp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mp3.mp3; sourceTree = "<group>"; };
 		06B697401BF0CD1B00DC9F6F /* aif.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = aif.aiff; sourceTree = "<group>"; };
+		06D5F33F1C04C66D00064900 /* YourSignature.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YourSignature.ttf; sourceTree = "<group>"; };
+		06D5F3411C04C67F00064900 /* Prida02Calt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Prida02Calt.otf; sourceTree = "<group>"; };
+		06D5F3431C04D1D200064900 /* ProximaNova-BoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-BoldIt.otf"; sourceTree = "<group>"; };
 		711976AD19A392DE005748B4 /* nyanCat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nyanCat.png; sourceTree = "<group>"; };
 		71239DA41912BFF70058657F /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71239DA71912BFF70058657F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -119,6 +125,9 @@
 		71239DAE1912BFF70058657F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				06D5F3431C04D1D200064900 /* ProximaNova-BoldIt.otf */,
+				06D5F3411C04C67F00064900 /* Prida02Calt.otf */,
+				06D5F33F1C04C66D00064900 /* YourSignature.ttf */,
 				71239DAF1912BFF70058657F /* Example-Info.plist */,
 				71239DB01912BFF70058657F /* InfoPlist.strings */,
 				71239DB31912BFF80058657F /* main.m */,
@@ -191,10 +200,13 @@
 			files = (
 				0613AB631BF6367600161357 /* LoginViewController.storyboard in Resources */,
 				715C078F198D029800316E8C /* Icons.bundle in Resources */,
+				06D5F3401C04C66D00064900 /* YourSignature.ttf in Resources */,
 				715C0790198D029800316E8C /* doge.jpeg in Resources */,
 				0613AB5F1BF635E700161357 /* MyView.xib in Resources */,
 				71239DB21912BFF80058657F /* InfoPlist.strings in Resources */,
 				06B6973F1BF0CD0900DC9F6F /* mp3.mp3 in Resources */,
+				06D5F3421C04C67F00064900 /* Prida02Calt.otf in Resources */,
+				06D5F3441C04D1D200064900 /* ProximaNova-BoldIt.otf in Resources */,
 				0613AB611BF635F300161357 /* MyScene.storyboard in Resources */,
 				71239DBA1912BFF80058657F /* Media.xcassets in Resources */,
 				71239DDC1912C07E0058657F /* Localizable.strings in Resources */,

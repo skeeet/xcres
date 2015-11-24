@@ -8,6 +8,11 @@
 #import "R.h"
 
 const struct R R = {
+    .Fonts = {
+        .prida02Calt = @"Prida02Calt",
+        .proximaNovaBoldIt = @"ProximaNova-BoldIt",
+        .yourSignature = @"YourSignature",
+    },
     .Icons = {
         .Images = {
             .tabBarTabbarList = @"tab_bar/tabbar_list.png",
