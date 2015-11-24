@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		060E879A1BF09E9900083714 /* mp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 060E87991BF09E9900083714 /* mp3.mp3 */; };
+		06D5F3461C04D6EC00064900 /* YourSignature.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 06D5F3451C04D6EC00064900 /* YourSignature.ttf */; };
+		06D5F3481C04D70E00064900 /* ProximaNova-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 06D5F3471C04D70E00064900 /* ProximaNova-BoldItalic.otf */; };
 		06DD88821BFA2597007292D8 /* TestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06DD88811BFA2596007292D8 /* TestView.xib */; };
 		06DD88841BFA25A3007292D8 /* TestMyStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06DD88831BFA25A3007292D8 /* TestMyStoryboard.storyboard */; };
 		06DD88861BFA25AE007292D8 /* TestMyScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06DD88851BFA25AE007292D8 /* TestMyScene.storyboard */; };
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		060E87991BF09E9900083714 /* mp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mp3.mp3; sourceTree = "<group>"; };
 		060E879B1BF09EAC00083714 /* aif.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = aif.aiff; sourceTree = "<group>"; };
+		06D5F3451C04D6EC00064900 /* YourSignature.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = YourSignature.ttf; sourceTree = "<group>"; };
+		06D5F3471C04D70E00064900 /* ProximaNova-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-BoldItalic.otf"; sourceTree = "<group>"; };
 		06DD88811BFA2596007292D8 /* TestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestView.xib; sourceTree = "<group>"; };
 		06DD88831BFA25A3007292D8 /* TestMyStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestMyStoryboard.storyboard; sourceTree = "<group>"; };
 		06DD88851BFA25AE007292D8 /* TestMyScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestMyScene.storyboard; sourceTree = "<group>"; };
@@ -119,7 +123,9 @@
 				71239DAE1912BFF70058657F /* Supporting Files */,
 				06DD88811BFA2596007292D8 /* TestView.xib */,
 				06DD88831BFA25A3007292D8 /* TestMyStoryboard.storyboard */,
+				06D5F3451C04D6EC00064900 /* YourSignature.ttf */,
 				06DD88851BFA25AE007292D8 /* TestMyScene.storyboard */,
+				06D5F3471C04D70E00064900 /* ProximaNova-BoldItalic.otf */,
 				06DD88871BFA25B7007292D8 /* OtherName.storyboard */,
 			);
 			path = Example;
@@ -191,11 +197,13 @@
 			files = (
 				06DD88821BFA2597007292D8 /* TestView.xib in Resources */,
 				06DD88861BFA25AE007292D8 /* TestMyScene.storyboard in Resources */,
+				06D5F3461C04D6EC00064900 /* YourSignature.ttf in Resources */,
 				06DD88841BFA25A3007292D8 /* TestMyStoryboard.storyboard in Resources */,
 				06DD88881BFA25B7007292D8 /* OtherName.storyboard in Resources */,
 				711976B119A3A1BE005748B4 /* doge.jpeg in Resources */,
 				060E879A1BF09E9900083714 /* mp3.mp3 in Resources */,
 				71239DB21912BFF80058657F /* InfoPlist.strings in Resources */,
+				06D5F3481C04D70E00064900 /* ProximaNova-BoldItalic.otf in Resources */,
 				71239DBA1912BFF80058657F /* Media.xcassets in Resources */,
 				71239DDC1912C07E0058657F /* Localizable.strings in Resources */,
 			);
