@@ -10,7 +10,7 @@
 as struct constants. So you will never have to reference a resource, without
 knowing already at compile time if it exists or not.
 
-It includes **images**, **sounds**, **.xibs**, **.storyboards**, **.bundles**, **asset catalogs** (.xcasset), and even **.strings** in the index.
+It includes **images**, **sounds**, **.xibs**, **.storyboards**, **.bundles**, **asset catalogs** (.xcasset), **fonts**, and even **.strings** in the index.
 
 It gives you **code autocompletion** for resources, localized string keys and interface builder reuse identifiers,
 without the need of an Xcode plugin.
@@ -37,6 +37,10 @@ project's bridging header.
 
 ```objc
 FOUNDATION_EXTERN const struct R {
+	struct Fonts {
+		/// MyFont.ttf
+		__unsafe_unretained NSString *myFont;
+	} Fonts;
     struct Images {
         /// doge.jpeg
         __unsafe_unretained NSString *doge;
@@ -196,6 +200,20 @@ Just write:
 
 ```objc
 NSLocalizedString(R.Strings.errorMessageWrongPassword, @"Message shown if a wrong password was entered.")
+```
+
+### Fonts
+
+Instead of:
+
+```objc
+[UIFont fontWithName:@"Helvetica" size:15]
+```
+
+Just write:
+
+```objc
+[UIFont fontWithName:R.Fonts.helvetica size:15]
 ```
 
 
