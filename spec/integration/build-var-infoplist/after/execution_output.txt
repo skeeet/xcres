@@ -29,6 +29,7 @@
 Ⓥ Found 1 segue identifiers in file Example/Example/Stuff.storyboard
 Ⓥ Found 7 storyboard identifiers in file Example/Example/Stuff.storyboard
 Ⓥ Found 2 restoration identifiers in file Example/Example/Stuff.storyboard
+Ⓥ Found 0 table column identifiers in file Example/Example/Stuff.storyboard
 Ⓥ Font files in project: []
 Ⓥ Non-ignored font files: []
 ✓ Successfully updated: ROOT/tmp/integration/build-var-infoplist/R.h

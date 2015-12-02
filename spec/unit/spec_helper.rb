@@ -12,6 +12,14 @@ def xcodeproj
   Xcodeproj::Project.open(fixture_path + 'Example/Example.xcodeproj')
 end
 
+def xcodeproj_osx
+  Xcodeproj::Project.open(fixture_path + 'ExampleOSX/ExampleOSX.xcodeproj')
+end
+
 def app_target
   xcodeproj.targets.find { |t| t.name == 'Example' }
+end
+
+def app_target_osx
+  xcodeproj_osx.targets.find { |t| t.name == 'ExampleOSX' }
 end

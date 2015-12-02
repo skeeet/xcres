@@ -65,6 +65,10 @@ describe 'XCRes::IBAnalyzer' do
         XCRes::Section.new('RestorationIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
           'id1' => 'Id1',
           'id2' => 'Id2' 
+        })}),
+        XCRes::Section.new('TableColumnIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
+          'id1' => 'Id1',
+          'id2' => 'Id2' 
         })})
       ])
     end
@@ -93,13 +97,16 @@ describe 'XCRes::IBAnalyzer' do
         })}),
         XCRes::Section.new('RestorationIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
         'id1' => 'Id1'
+        })}),
+        XCRes::Section.new('TableColumnIdentifiers', { 'TestView' => XCRes::Section.new('TestView', {
+        'id1' => 'Id1'
         })})
       ])
     end
 
   end
 
-  describe "with fixture project" do
+  describe "with fixture iOS project" do
     before do
       @target = app_target
       @analyzer = subject.new(@target)
@@ -135,6 +142,38 @@ describe 'XCRes::IBAnalyzer' do
             }),
             'OtherName' => XCRes::Section.new('OtherName', {
               'other_name' => 'OtherName'
+            })
+          })
+        ])
+      end
+    end
+  end
+
+  describe "with fixture OS X project" do
+    before do
+      @target = app_target_osx
+      @analyzer = subject.new(@target)
+      @analyzer.logger = stub('Logger', :log)
+      @analyzer.expects(:warn).never
+      @analyzer.expects(:error).never
+    end
+
+    describe "#ib_file_refs" do
+      it 'should return the ib files of the fixture project' do
+        ib_files = @analyzer.ib_file_refs
+        ib_files.count.should.be.eql?(1)
+        ib_files[0].path.should.be.eql?('Base.lproj/MainMenu.xib')
+      end
+    end
+
+    describe "complete identifiers sections" do
+      it 'should return a section build for all reuse identifiers in all xib files' do
+        path = fixture_path + 'ExampleOSX/ExampleOSX/Base.lproj/MainMenu.xib'
+        @analyzer.build_sections.should.be.eql?([
+          XCRes::Section.new('TableColumnIdentifiers', { 
+            'MainMenu' => XCRes::Section.new('MainMenu', {
+              'column1' => 'column1',
+              'column2' => 'column2'
             })
           })
         ])
