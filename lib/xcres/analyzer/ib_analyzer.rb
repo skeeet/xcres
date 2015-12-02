@@ -33,6 +33,7 @@ module XCRes
       segue_ids = {}
       storyboard_ids = {}
       restoration_ids = {}
+      table_column_ids = {}
       for path in rel_file_paths
         filename = path.relative_path_from(path.parent)
         extension = File.extname(path)
@@ -51,6 +52,9 @@ module XCRes
 
           # Find restoration identifiers
           r_ids = find_elements(doc, '*', 'restorationIdentifier')
+
+          # Find table column identifiers (OS X only)
+          t_ids = find_elements(doc, 'tableColumn', 'identifier')
 
           if extension == '.storyboard' then
 
@@ -76,6 +80,9 @@ module XCRes
 
           log 'Found %s restoration identifiers in file %s', r_ids.count, path
           restoration_ids[key] = XCRes::Section.new(key, r_ids) if r_ids.count > 0
+
+          log 'Found %s table column identifiers in file %s', t_ids.count, path
+          table_column_ids[key] = XCRes::Section.new(key, t_ids) if t_ids.count > 0
             
         rescue ArgumentError => error
           raise ArgumentError, 'Error while reading %s: %s' % [path, error]
@@ -87,6 +94,7 @@ module XCRes
       res += [new_section('SegueIdentifiers', segue_ids)] if segue_ids.count > 0
       res += [new_section('StoryboardIdentifiers', storyboard_ids)] if storyboard_ids.count > 0
       res += [new_section('RestorationIdentifiers', restoration_ids)] if restoration_ids.count > 0
+      res += [new_section('TableColumnIdentifiers', table_column_ids)] if table_column_ids.count > 0
       res
     end
 
