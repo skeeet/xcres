@@ -1,6 +1,7 @@
 require 'xcres/analyzer/analyzer'
 require 'xcres/model/string'
 require 'json'
+require 'plist'
 
 module XCRes
 
@@ -65,7 +66,14 @@ module XCRes
     # @return [Array<PBXFileReference>]
     #
     def strings_file_refs
-      @strings_file_refs ||= find_file_refs_by_extname '.strings'
+      plain = find_file_refs_by_extname '.strings'
+      localized = find_file_refs_by_extname '.stringsdict'
+      all = []
+      all.concat(plain) if plain and plain.length
+      all.concat(localized) if localized and localized.length
+
+      @strings_file_refs ||= all
+
     end
 
     # Select strings files by language
@@ -200,6 +208,24 @@ module XCRes
       raise StandardError, "Encoding error in #{path}: #{e}"
     end
 
+
+    # Read a .stringsdict file given as a path
+    #
+    # @param [Pathname] path
+    #        the path of the strings file
+    #
+    # @return [Hash]
+    #
+    def read_stringsdict_file(path)
+      raise ArgumentError, "File '#{path}' doesn't exist" unless path.exist?
+      raise ArgumentError, "File '#{path}' is not a file" unless path.file?
+
+      s = Hash.new
+      Plist::parse_xml(path).each { |k, v| s[k] = k }
+      s
+
+    end
+
     # Calculate the absolute path for a file path given relative to the
     # project / its `$SRCROOT`.
     #
@@ -231,7 +257,11 @@ module XCRes
     def keys_by_file(path)
       begin
         # Load strings file contents
-        strings = read_strings_file(path)
+        if path.extname().end_with?("stringsdict")
+          strings = read_stringsdict_file(path)
+        else
+          strings = read_strings_file(path)
+        end
 
         # Reject generated identifiers used by Interface Builder
         strings.reject! { |key, _| /^[a-zA-Z0-9]+(-[a-zA-Z0-9]+){2}/.match(key) }
